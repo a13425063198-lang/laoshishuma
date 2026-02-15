@@ -17,7 +17,12 @@ h1{text-align: center; margin-bottom: 20px; color: #333}
   margin-bottom: 20px;
 }
 
-select, button{
+.price-row {
+  display: flex;
+  gap: 8px;
+}
+
+select, input, button{
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
@@ -34,6 +39,131 @@ button{
 
 button:hover{
   background: #3367d6;
+}
+
+.phone-list{
+  margin-top:20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phone-item{
+  background: #fafafa;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.phone-name{
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.phone-spec{
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+/* 底部提示文字 */
+.tip{
+  margin-top:12px;
+  font-size:12px;
+  color:#999;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>老湿数码推荐</h1>
+
+  <div class="filter">
+    <select id="brand">
+      <option value="全部">品牌：全部</option>
+      <option value="小米">小米</option>
+      <option value="红米">红米</option>
+      <option value="华为">华为</option>
+      <option value="荣耀">荣耀</option>
+      <option value="苹果">苹果</option>
+      <option value="iQOO">iQOO</option>
+      <option value="realme">realme</option>
+    </select>
+
+    <div class="price-row">
+      <input type="number" id="minPrice" placeholder="最低价格" min="1" max="20000">
+      <input type="number" id="maxPrice" placeholder="最高价格" min="1" max="20000">
+    </div>
+
+    <select id="need">
+      <option value="全部">需求：全部</option>
+      <option value="游戏">游戏性能</option>
+      <option value="续航">长续航</option>
+      <option value="拍照">拍照好</option>
+      <option value="轻薄">轻薄便携</option>
+    </select>
+  </div>
+
+  <button onclick="filterPhone()">开始筛选</button>
+  <div style="margin-top:20px" id="result"></div>
+
+  <!-- 你要的注释 -->
+  <div class="tip">
+    筛选仅供参考，价格参考闲鱼市场价
+  </div>
+</div>
+
+<script>
+const phones = [
+  {brand:"红米", name:"Redmi K70", price:2499, need:"游戏", spec:"骁龙8 Gen2，2K高光屏，5500mAh"},
+  {brand:"红米", name:"Redmi Note13 Pro", price:1399, need:"拍照", spec:"一亿像素，1.5K屏，5000mAh"},
+  {brand:"小米", name:"小米14", price:4299, need:"拍照", spec:"骁龙8 Gen3，徕卡镜头，轻薄手感"},
+  {brand:"小米", name:"小米13", price:2999, need:"游戏", spec:"骁龙8 Gen2，小屏直屏，续航稳定"},
+  {brand:"苹果", name:"iPhone 15", price:5999, need:"轻薄", spec:"A16芯片，iOS流畅，耐用"},
+  {brand:"iQOO", name:"iQOO Neo9", price:2599, need:"游戏", spec:"骁龙8 Gen2，电竞散热，144Hz"},
+  {brand:"realme", name:"真我GT Neo5 SE", price:1799, need:"续航", spec:"5500mAh，1.5K屏，性能强"},
+  {brand:"荣耀", name:"荣耀X50", price:1399, need:"续航", spec:"5800mAh超大电池，护眼屏"},
+  {brand:"华为", name:"华为nova 12", price:2499, need:"拍照", spec:"前置人像，轻薄颜值高"}
+];
+
+function filterPhone(){
+  const b = document.getElementById("brand").value;
+  let min = parseInt(document.getElementById("minPrice").value) || 1;
+  let max = parseInt(document.getElementById("maxPrice").value) || 20000;
+
+  min = Math.max(1, Math.min(20000, min));
+  max = Math.max(1, Math.min(20000, max));
+
+  if(min > max) [min, max] = [max, min];
+
+  const n = document.getElementById("need").value;
+
+  const list = phones.filter(item =>
+    (b=="全部" || item.brand==b) &&
+    (item.price >= min && item.price <= max) &&
+    (n=="全部" || item.need==n)
+  );
+
+  const dom = document.getElementById("result");
+  if(list.length==0){ dom.innerHTML="<p>暂无匹配机型</p>"; return }
+
+  dom.innerHTML = `<div class="phone-list">`+
+  list.map(item=>`
+  <div class="phone-item">
+    <div class="phone-name">${item.name}</div>
+    <div class="phone-spec">${item.spec}</div>
+    <div style="font-size:12px;color:#888">
+      ${item.brand} | ${item.price}元 | ${item.need}
+    </div>
+  </div>
+  `).join('')+`</div>`;
+}
+</script>
+</body>
+</html>
 }
 
 .phone-list{
