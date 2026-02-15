@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手机推荐助手</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f5f5;padding:20px}
+.container{max-width:800px;margin:0 auto;background:white;padding:24px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+h1{text-align:center;margin-bottom:20px;color:#333}
+.filter{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+select,button{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:16px}
+button{background:#4285f4;color:white;border:none;cursor:pointer}
+button:hover{background:#3367d6}
+.phone-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.phone-item{background:#fafafa;padding:14px;border-radius:8px;border:1px solid #eee}
+.phone-name{font-weight:bold;font-size:17px;margin-bottom:6px}
+.phone-spec{font-size:14px;color:#666;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>手机推荐助手</h1>
+  <div class="filter">
+    <select id="brand">
+      <option value="全部">品牌：全部</option>
+      <option value="小米">小米</option>
+      <option value="红米">红米</option>
+      <option value="华为">华为</option>
+      <option value="荣耀">荣耀</option>
+      <option value="苹果">苹果</option>
+      <option value="iQOO">iQOO</option>
+      <option value="realme">realme</option>
+    </select>
+    <select id="price">
+      <option value="全部">价格：全部</option>
+      <option value="1000内">1000元内</option>
+      <option value="1000-2000">1000-2000</option>
+      <option value="2000-3000">2000-3000</option>
+      <option value="3000以上">3000以上</option>
+    </select>
+    <select id="need">
+      <option value="全部">需求：全部</option>
+      <option value="游戏">游戏性能</option>
+      <option value="续航">长续航</option>
+      <option value="拍照">拍照好</option>
+      <option value="轻薄">轻薄便携</option>
+    </select>
+  </div>
+  <button onclick="filterPhone()">开始筛选</button>
+  <div style="margin-top:20px" id="result"></div>
+</div>
+
+<script>
+const phones = [
+  {brand:"红米",name:"Redmi K70",price:"2000-3000",need:"游戏",spec:"骁龙8 Gen2，2K高光屏，5500mAh"},
+  {brand:"红米",name:"Redmi Note13 Pro",price:"1000-2000",need:"拍照",spec:"一亿像素，1.5K屏，5000mAh"},
+  {brand:"小米",name:"小米14",price:"3000以上",need:"拍照",spec:"骁龙8 Gen3，徕卡镜头，轻薄手感"},
+  {brand:"小米",name:"小米13",price:"2000-3000",need:"游戏",spec:"骁龙8 Gen2，小屏直屏，续航稳"},
+  {brand:"苹果",name:"iPhone 15",price:"3000以上",need:"轻薄",spec:"A16芯片，iOS流畅，耐用"},
+  {brand:"iQOO",name:"iQOO Neo9",price:"2000-3000",need:"游戏",spec:"骁龙8 Gen2，电竞散热，144Hz"},
+  {brand:"realme",name:"真我GT Neo5 SE",price:"1000-2000",need:"续航",spec:"5500mAh，1.5K屏，性价比高"},
+  {brand:"荣耀",name:"荣耀X50",price:"1000-2000",need:"续航",spec:"5800mAh超大电池，护眼屏"},
+  {brand:"华为",name:"华为nova 12",price:"2000-3000",need:"拍照",spec:"前置人像，轻薄颜值高"}
+];
+
+function filterPhone(){
+  const b = document.getElementById("brand").value;
+  const p = document.getElementById("price").value;
+  const n = document.getElementById("need").value;
+  const list = phones.filter(i=>
+    (b=="全部"||i.brand==b) &&
+    (p=="全部"||i.price==p) &&
+    (n=="全部"||i.need==n)
+  );
+  const dom = document.getElementById("result");
+  if(list.length==0){dom.innerHTML="<p>暂无匹配机型</p>";return}
+  dom.innerHTML = `<div class="phone-list">`+
+    list.map(i=>`
+      <div class="phone-item">
+        <div class="phone-name">${i.name}</div>
+        <div class="phone-spec">${i.spec}</div>
+        <div style="font-size:12px;color:#888">${i.brand} | ${i.price} | ${i.need}</div>
+      </div>
+    `).join('')+`</div>`;
+}
+</script>
+</body>
+</html>
