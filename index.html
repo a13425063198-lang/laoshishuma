@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大湿数码推荐</title>
+<title>老湿数码推荐</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft YaHei",sans-serif;font-weight:bold}
 body{background:#f5f5f5;padding:20px}
@@ -34,7 +34,7 @@ button:hover{background:#3367d6}
 <body>
 
 <div class="container">
-  <h1>大湿数码推荐</h1>
+  <h1>老湿数码推荐</h1>
   <div class="filter">
     <input type="text" id="keyword" placeholder="搜索：骁龙8 Gen2、直屏、LCD、游戏、续航、徕卡、哈苏">
     <select id="brand">
@@ -96,94 +96,4 @@ const phones = [
 {brand:"小米",name:"小米14 Pro",price:1300,spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡",reason:"大屏全能旗舰"}, 
 {brand:"小米",name:"小米14 Ultra",price:2200,spec:"骁龙8 Gen3、2K、5300mAh、90W、专业徕卡",reason:"顶级影像旗舰"}, 
 {brand:"小米",name:"小米15",price:2000,spec:"骁龙8至尊版、6.36英寸1.5K直屏、5400mAh+90W有线/50W无线",reason:"小屏旗舰，手感均衡"}, 
-{brand:"小米",name:"小米15 Pro",price:2400,spec:"骁龙8至尊版、6.73英寸2K微曲屏、6100mAh+90W有线/50W无线",reason:"续航影像，全能旗舰"}, 
-{brand:"小米",name:"小米15 Ultra",price:3200,spec:"骁龙8至尊版、6.73英寸2K微曲屏、6000mAh+90W有线/80W无线、徕卡四摄（含2亿像素长焦）",reason:"徕卡加持，影像巅峰"}, 
-{brand:"小米",name:"小米17",price:3150,spec:"第五代骁龙8至尊版、1.5K直屏、7000mAh+100W快充",reason:"小屏旗舰，续航够用"}, 
-{brand:"小米",name:"小米17 Pro",price:3900,spec:"第五代骁龙8至尊版、1.5K直屏、6300mAh+100W快充、妙享背屏",reason:"妙享背屏，续航优秀"}, 
-{brand:"小米",name:"小米17 Pro Max",price:4700,spec:"第五代骁龙8至尊版、2K直屏、7500mAh+100W快充、妙享背屏",reason:"妙享背屏，续航够用，性能强劲"}, 
-{brand:"小米",name:"小米17Ultra",price:5500,spec:"第五代骁龙8至尊版、1.5K直屏、5500mAh",reason:"徕卡联名，顶级旗舰"}, 
-
-{brand:"红米",name:"Redmi K30 Ultra",price:360,spec:"天玑1000+、120Hz LCD、4500mAh",reason:"千元神机，LCD屏"}, 
-{brand:"红米",name:"Redmi K30S 至尊版",price:430,spec:"骁龙865、144Hz LCD、5000mAh",reason:"LCD护眼"}, 
-{brand:"红米",name:"Redmi K40",price:470,spec:"骁龙870、120Hz E4、4520mAh",reason:"性价比神U，屏幕优秀"},  
-{brand:"红米",name:"Redmi K40S",price:480,spec:"骁龙870、VC散热、67W快充",reason:"散热升级，更稳"}, 
-{brand:"红米",name:"Redmi K50",price:480,spec:"天玑8100、2K 120Hz、5500mAh",reason:"续航强，2K直屏"}, 
-{brand:"红米",name:"Redmi K50 Pro",price:550,spec:"天玑9000、5000mAh、120W",reason:"百瓦快充，性能旗舰"}, 
-{brand:"小米",name:"红米K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
-{brand:"红米",name:"Redmi K60",price:580,spec:"骁龙8+降频版、2K高光屏、5500mAh",reason:"2K屏+长续航"}, 
-{brand:"红米",name:"Redmi K60 Pro",price:720,spec:"骁龙8 Gen2、2K、120W快充",reason:"性能小钢炮"}, 
-{brand:"红米",name:"Redmi K60 至尊版",price:650,spec:"天玑9200+、狂暴性能、1.5K",reason:"性价比游戏旗舰"}, 
-{brand:"红米",name:"Redmi K70",price:850,spec:"骁龙8 Gen2、2K高光屏、5000mAh、120W",reason:"质感、屏幕、续航全拉满"}, 
-{brand:"红米",name:"Redmi K70E",price:790,spec:"天玑8300、1.5K、5500mAh、90W",reason:"性价比神机"}, 
-{brand:"红米",name:"Redmi K70 Pro",price:1080,spec:"骁龙8 Gen3、2K、120W、",reason:"旗舰下放"}, 
-{brand:"红米",name:"Redmi K70 至尊版",price:1400,spec:"天玑9300+、电竞级散热、1.5K",reason:"强性能"}, 
-
-{brand:"红米",name:"Redmi Turbo 3",price:750,spec:"骁龙8s Gen3、1.5K、5000mAh",reason:"性能小钢炮"}, 
-{brand:"红米",name:"Redmi Turbo 4",price:900,spec:"骁龙8 Gen2 升级版、1.5K、百瓦快充",reason:"游戏性价比神机"}, 
-{brand:"红米",name:"Redmi Turbo 4Pro",price:1200,spec:"骁龙8s Gen4、1.5K直屏、7550mAh",reason:"续航很强，性价比高"}, 
- {brand:"OPPO",name:"OPPO Find X6",price:850,spec:"天机9200+、4800mAh",reason:"哈苏影像，旗舰性能"},
-{brand:"OPPO",name:"OPPO Reno 8Pro+",price:550,spec:"天机8100、OLED直屏、4500mAh",reason:"轻薄续航稳"},
-{brand:"苹果",name:"iPhone 12",price:850,spec:"A14、iOS、6.1英寸、耐用流畅",reason:"系统流畅，耐用"},
-{brand:"苹果",name:"iPhone 12 Pro",price:1100,spec:"A14、三摄、6.1英寸、不锈钢边框",reason:"影像旗舰"},
-{brand:"苹果",name:"iPhone 13",price:1100,spec:"A15、6.1英寸、长续航、防抖",reason:"续航提升明显"},
-{brand:"苹果",name:"iPhone 14",price:1300,spec:"A15、6.1英寸、防抖、车祸检测",reason:"稳定耐用"},
-{brand:"苹果",name:"iPhone 15",price:1900,spec:"A16、6.1英寸、Type‑C、4800万",reason:"均衡实用"}
-];
-
-let currentList = [];
-
-function filterPhone() {
-  const key = (document.getElementById("keyword").value || "").toLowerCase();
-  const brand = document.getElementById("brand").value;
-  const sortBy = document.getElementById("sortBy").value;
-  let min = parseInt(document.getElementById("minPrice").value) || 0;
-  let max = parseInt(document.getElementById("maxPrice").value) || 99999;
-
-  let list = phones.filter(p => 
-    (brand === "全部" || p.brand === brand) &&
-    (p.price >= min && p.price <= max) &&
-    (p.name.toLowerCase().includes(key) || p.spec.toLowerCase().includes(key))
-  );
-
-  if (sortBy === "asc") {
-    list.sort((a, b) => a.price - b.price);
-  } else if (sortBy === "desc") {
-    list.sort((a, b) => b.price - a.price);
-  }
-
-  currentList = list;
-  const res = document.getElementById("result");
-
-  if (currentList.length === 0) {
-    res.innerHTML = "<p>暂无匹配机型</p>";
-    return;
-  }
-
-  res.innerHTML = `
-  <div class="phone-list">
-    ${currentList.map((p, i) => `
-      <div class="phone-item" onclick="showDetail(${i})">
-        <div class="phone-name">${p.name}</div>
-        <div class="phone-spec">${p.price}元 | ${p.spec.slice(0, 24)}...</div>
-      </div>
-    `).join('')}
-  </div>`;
-}
-
-function showDetail(index) {
-  const p = currentList[index];
-  document.getElementById("detailContent").innerHTML = `
-    <h3>${p.name}</h3>
-    <p>价格：${p.price}元（参考）</p>
-    <p>配置：${p.spec}</p>
-    <p>推荐理由：${p.reason}</p>
-  `;
-  document.getElementById("modal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-</script>
-</body>
-</html>
+{brand:"小米",name:"小米15 Pro",price:2400,spec:"骁龙8至尊版、6.73
