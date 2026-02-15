@@ -5,212 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>老湿数码推荐</title>
 <style>
-*{box-sizing: border-box; margin: 0; padding: 0}
-body{font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px}
-.container{max-width: 500px; margin: 0 auto; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1)}
-h1{text-align: center; margin-bottom: 20px; color: #333}
-
-.filter{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.price-row {
-  display: flex;
-  gap: 8px;
-}
-
-select, input, button{
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-button{
-  background: #4285f4;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover{
-  background: #3367d6;
-}
-
-.phone-list{
-  margin-top:20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.phone-item{
-  background: #fafafa;
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #eee;
-}
-
-.phone-name{
-  font-weight: bold;
-  font-size: 17px;
-  margin-bottom: 6px;
-}
-
-.phone-spec{
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 4px;
-}
-
-/* 底部提示文字 */
-.tip{
-  margin-top:12px;
-  font-size:12px;
-  color:#999;
-  text-align:center;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f5f5;padding:20px}
+.container{max-width:500px;margin:0 auto;background:#fff;padding:24px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+h1{text-align:center;margin-bottom:20px;color:#333}
+.filter{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.price-row{display:flex;gap:8px}
+input,select,button{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:16px}
+button{background:#4285f4;color:white;border:none;cursor:pointer}
+button:hover{background:#3367d6}
+.phone-list{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.phone-item{background:#fafafa;padding:14px;border-radius:8px;border:1px solid #eee;cursor:pointer}
+.phone-name{font-weight:bold;font-size:17px;margin-bottom:6px}
+.phone-spec{font-size:14px;color:#666}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none;justify-content:center;align-items:center;padding:20px}
+.modal-content{background:white;padding:24px;border-radius:12px;max-width:400px;width:100%;max-height:80vh;overflow-y:auto}
+.modal-content h3{margin-bottom:12px}
+.modal-content p{margin:8px 0;line-height:1.5}
+.close{margin-top:16px;padding:10px;background:#eee;border:none;border-radius:8px;width:100%;cursor:pointer}
+.tip{margin-top:12px;font-size:12px;color:#999;text-align:center;line-height:1.4}
 </style>
 </head>
 <body>
 
 <div class="container">
   <h1>老湿数码推荐</h1>
-
   <div class="filter">
+    <input type="text" id="keyword" placeholder="关键词搜索：骁龙、拍照、续航...">
     <select id="brand">
       <option value="全部">品牌：全部</option>
       <option value="小米">小米</option>
       <option value="红米">红米</option>
-      <option value="华为">华为</option>
-      <option value="荣耀">荣耀</option>
-      <option value="苹果">苹果</option>
+      <option value="一加">一加</option>
+      <option value="OPPO">OPPO</option>
+      <option value="vivo">vivo</option>
       <option value="iQOO">iQOO</option>
-      <option value="realme">realme</option>
+      <option value="苹果">苹果</option>
+      <option value="华为">华为</option>
     </select>
-
     <div class="price-row">
-      <input type="number" id="minPrice" placeholder="最低价格" min="1" max="20000">
-      <input type="number" id="maxPrice" placeholder="最高价格" min="1" max="20000">
+      <input type="number" id="minPrice" placeholder="最低" min="1" max="20000">
+      <input type="number" id="maxPrice" placeholder="最高" min="1" max="20000">
     </div>
-
-    <select id="need">
-      <option value="全部">需求：全部</option>
-      <option value="游戏">游戏性能</option>
-      <option value="续航">长续航</option>
-      <option value="拍照">拍照好</option>
-      <option value="轻薄">轻薄便携</option>
-    </select>
   </div>
-
   <button onclick="filterPhone()">开始筛选</button>
-  <div style="margin-top:20px" id="result"></div>
+  <div id="result"></div>
+  <div class="tip">筛选仅供参考，价格为闲鱼市场价，本网站只收录了2020年1月1日后国内发布的手机，部分机型可能没有添加。</div>
+</div>
 
-  <!-- 你要的注释 -->
-  <div class="tip">
-    筛选仅供参考，价格参考闲鱼市场价
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div id="detailContent"></div>
+    <button class="close" onclick="closeModal()">关闭</button>
   </div>
 </div>
 
 <script>
 const phones = [
-  // 小米 10 系列
-  {brand:"小米", name:"小米10", price:900, need:"均衡", spec:"骁龙865、90Hz AMOLED、4780mAh、30W、一亿像素", reason:"2020年旗舰，均衡水桶，二手性价比高"},
-  {brand:"小米", name:"小米10 Pro", price:1100, need:"拍照", spec:"骁龙865、90Hz、4500mAh、50W、一亿像素主摄", reason:"当年顶级影像，拍照更强，质感更好"},
-  {brand:"小米", name:"小米10 Ultra", price:1300, need:"拍照", spec:"骁龙865、120Hz、4500mAh、120W、超清四摄", reason:"2020年影像机皇，120W快充，收藏级"},
-  {brand:"小米", name:"小米10S", price:800, need:"均衡", spec:"骁龙870、90Hz、4780mAh、33W、对称双扬", reason:"音质最好的小米之一，骁龙870非常稳"},
-
-  // 小米 11 系列
-  {brand:"小米", name:"小米11", price:700, need:"均衡", spec:"骁龙888、2K 120Hz、4600mAh、55W", reason:"2K顶级屏幕，性能强，二手价格低"},
-  {brand:"小米", name:"小米11 Pro", price:900, need:"续航", spec:"骁龙888、2K、5000mAh、67W、GN2主摄", reason:"大底主摄，续航更强，散热更好"},
-  {brand:"小米", name:"小米11 Ultra", price:1300, need:"拍照", spec:"骁龙888、2K、5000mAh、67W、三主摄GN2", reason:"安卓机皇，影像拉满，辨识度极高"},
-
-  // 小米 12 系列
-  {brand:"小米", name:"小米12", price:1500, need:"轻薄", spec:"骁龙8 Gen1、小屏、4500mAh、67W", reason:"手感轻薄，小屏单手神器"},
-  {brand:"小米", name:"小米12 Pro", price:1800, need:"均衡", spec:"骁龙8 Gen1、2K、4600mAh、120W", reason:"大屏旗舰，快充猛，屏幕好"},
-  {brand:"小米", name:"小米12S", price:1700, need:"轻薄", spec:"骁龙8+ Gen1、小屏、4500mAh、67W", reason:"发热控制极好，小屏旗舰首选"},
-  {brand:"小米", name:"小米12S Pro", price:2000, need:"拍照", spec:"骁龙8+ Gen1、2K、4600mAh、120W、徕卡", reason:"徕卡影像，性能稳，体验全面"},
-  {brand:"小米", name:"小米12S Ultra", price:3300, need:"拍照", spec:"骁龙8+ Gen1、2K、4860mAh、67W、徕卡一英寸", reason:"徕卡真旗舰，一英寸大底，影像天花板"},
-
-  // 小米 13 系列
-  {brand:"小米", name:"小米13", price:2999, need:"游戏", spec:"骁龙8 Gen2、小屏直屏、4500mAh、67W、徕卡三摄", reason:"手感一流，游戏稳，小屏直屏党首选"},
-  {brand:"小米", name:"小米13 Pro", price:3500, need:"拍照", spec:"骁龙8 Gen2、2K曲面、4820mAh、120W、徕卡一英寸", reason:"影像+性能双旗舰，屏幕顶级"},
-  {brand:"小米", name:"小米13 Ultra", price:4999, need:"拍照", spec:"骁龙8 Gen2、2K、5000mAh、90W、徕卡四摄", reason:"专业影像旗舰，街拍神器，安卓影像第一梯队"},
-
-  // 小米 14 系列
-  {brand:"小米", name:"小米14", price:4299, need:"拍照", spec:"骁龙8 Gen3、徕卡镜头、小屏旗舰、IP68", reason:"最新小屏旗舰，性能、拍照、手感全拉满"},
-  {brand:"小米", name:"小米14 Pro", price:5299, need:"拍照", spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡", reason:"大屏全能旗舰，快充、屏幕、影像全顶级"},
-  {brand:"小米", name:"小米14 Ultra", price:6499, need:"拍照", spec:"骁龙8 Gen3、2K、5300mAh、90W、徕卡专业四摄", reason:"2024小米影像之王，专业摄影首选"},
-
-  // 小米 Civi 系列（轻薄自拍）
-  {brand:"小米", name:"小米Civi 1S", price:1200, need:"轻薄", spec:"骁龙778G、轻薄、4500mAh、55W", reason:"颜值高，手感轻薄，自拍好看"},
-  {brand:"小米", name:"小米Civi 2", price:1500, need:"轻薄", spec:"骁龙7 Gen1、轻薄、自拍、67W", reason:"美颜自拍强，女生最爱的轻薄机身"},
-  {brand:"小米", name:"小米Civi 3", price:1900, need:"轻薄", spec:"天玑8200 Ultra、轻薄、前置双摄", reason:"性能更强，自拍更好，手感轻薄"},
-  {brand:"小米", name:"小米Civi 4 Pro", price:2399, need:"轻薄", spec:"骁龙8s Gen3、轻薄、自拍强、67W", reason:"Civi史上最强性能，自拍+颜值双在线"},
-
-  // 小米 MIX 折叠系列
-  {brand:"小米", name:"小米MIX Fold 2", price:5999, need:"折叠", spec:"骁龙8+ Gen1、超轻薄折叠、徕卡三摄", reason:"最轻薄的小米折叠屏，手感接近直板"},
-  {brand:"小米", name:"小米MIX Fold 3", price:8999, need:"折叠", spec:"骁龙8 Gen2、龙骨转轴、徕卡三摄、全能折叠", reason:"全能折叠屏，续航、影像、轻薄都强"},
-  {brand:"小米", name:"小米MIX Fold 4", price:9999, need:"折叠", spec:"骁龙8 Gen3、Ultra级影像、旗舰折叠", reason:"2024最强小米折叠，体验无短板"},
-
-  // 小米平板/其他我就不加了，只保留手机
-  // 下面是你原来其他品牌保留，我不删，只强化小米
-  {brand:"红米", name:"Redmi K30S至尊版", price:800, need:"续航", spec:"骁龙865、144Hz LCD、5000mAh、33W", reason:"LCD护眼，续航强，千元游戏神机"},
-  {brand:"红米", name:"Redmi K40", price:700, need:"游戏", spec:"骁龙870、120Hz E4、4520mAh、33W", reason:"性价比神U，屏幕好，二手便宜"},
-  {brand:"红米", name:"Redmi K50", price:1000, need:"续航", spec:"天玑8100、2K 120Hz、5500mAh、67W", reason:"续航超强，屏幕好，性能稳"},
-  {brand:"红米", name:"Redmi K60", price:1800, need:"游戏", spec:"骁龙8+ Gen1、2K 120Hz、5500mAh、67W", reason:"性能强，屏幕好，续航稳"},
-  {brand:"红米", name:"Redmi K70", price:2499, need:"游戏", spec:"骁龙8 Gen2、2K高光屏、5500mAh、120W", reason:"性能强、屏幕好、性价比极高"},
-  {brand:"红米", name:"Redmi Note 11T Pro", price:900, need:"续航", spec:"天玑8100、144Hz LCD、5080mAh、67W", reason:"LCD护眼，续航强，千元首选"},
-  {brand:"红米", name:"Redmi Note 12 Turbo", price:1499, need:"游戏", spec:"骁龙7+ Gen2、1.5K 120Hz、5000mAh、67W", reason:"性能强，性价比炸裂"},
-  {brand:"红米", name:"Redmi Note 13 Pro", price:1399, need:"拍照", spec:"一亿像素、1.5K屏、5000mAh、轻薄", reason:"千元拍照能手，屏幕舒服"},
-  {brand:"红米", name:"Redmi Turbo 5", price:1699, need:"游戏", spec:"骁龙8s Gen3、6.59英寸、5500mAh、100W", reason:"性能强，握持好，学生党首选"}
-  {brand:"红米", name:"Redmi K70", price:2499, need:"游戏", spec:"骁龙8 Gen2，2K高光屏，5500mAh"},
-  {brand:"红米", name:"Redmi Note13 Pro", price:1399, need:"拍照", spec:"一亿像素，1.5K屏，5000mAh"},
-  {brand:"小米", name:"小米14", price:4299, need:"拍照", spec:"骁龙8 Gen3，徕卡镜头，轻薄手感"},
-  {brand:"小米", name:"小米13", price:2999, need:"游戏", spec:"骁龙8 Gen2，小屏直屏，续航稳定"},
-  {brand:"苹果", name:"iPhone 15", price:5999, need:"轻薄", spec:"A16芯片，iOS流畅，耐用"},
-  {brand:"iQOO", name:"iQOO Neo9", price:2599, need:"游戏", spec:"骁龙8 Gen2，电竞散热，144Hz"},
-  {brand:"realme", name:"真我GT Neo5 SE", price:1799, need:"续航", spec:"5500mAh，1.5K屏，性能强"},
-  {brand:"荣耀", name:"荣耀X50", price:1399, need:"续航", spec:"5800mAh超大电池，护眼屏"},
-  {brand:"华为", name:"华为nova 12", price:2499, need:"拍照", spec:"前置人像，轻薄颜值高"}
-];
-
-function filterPhone(){
-  const b = document.getElementById("brand").value;
-  let min = parseInt(document.getElementById("minPrice").value) || 1;
-  let max = parseInt(document.getElementById("maxPrice").value) || 20000;
-
-  min = Math.max(1, Math.min(20000, min));
-  max = Math.max(1, Math.min(20000, max));
-
-  if(min > max) [min, max] = [max, min];
-
-  const n = document.getElementById("need").value;
-
-  const list = phones.filter(item =>
-    (b=="全部" || item.brand==b) &&
-    (item.price >= min && item.price <= max) &&
-    (n=="全部" || item.need==n)
-  );
-
-  const dom = document.getElementById("result");
-  if(list.length==0){ dom.innerHTML="<p>暂无匹配机型</p>"; return }
-
-  dom.innerHTML = `<div class="phone-list">`+
-  list.map(item=>`
-  <div class="phone-item">
-    <div class="phone-name">${item.name}</div>
-    <div class="phone-spec">${item.spec}</div>
-    <div style="font-size:12px;color:#888">
-      ${item.brand} | ${item.price}元 | ${item.need}
-    </div>
-  </div>
-  `).join('')+`</div>`;
-}
-</script>
-</body>
-</html>
+// ====================== 小米数字系列 ======================
+{brand:"小米", name:"小米10", price:380, need:"均衡", spec:"骁龙865、90Hz AMOLED、4780mAh、30W", reason:"经典旗舰，性价比极高"},
+{brand:"小米", name:"小米10 Pro", price:450, need:"拍照", spec:"骁龙865、120Hz、4500mAh、50W", reason:"当年顶级影像旗舰"},
+{brand:"小米", name:"小米10 Ultra", price:500, need:"拍照", spec:"骁龙865、120Hz、4500mAh、120W", reason:"小米初代影像机皇"},
+{brand:"小米", name:"小米11", price:380, need:"均衡", spec:"骁龙888、2K 120Hz、4600mAh、55W", reason:"2K屏旗舰，手感轻薄"},
+{brand:"小米", name:"小米11 Pro", price:450, need:"续航", spec:"骁龙888、2K、5000mAh、67W", reason:"大电池，散热更强"},
+{brand:"小米", name:"小米11 Ultra", price:650, need:"拍照", spec:"骁龙888、2K、5000mAh、67W、三主摄", reason:"安卓影像机皇"},
+{brand:"小米", name:"小米12", price:500, need:"轻薄", spec:"骁龙8 Gen1、小屏、4500mAh、67W", reason:"手感轻薄，小屏旗舰"},
+{brand:"小米", name:"小米12 Pro", price:500, need:"均衡", spec:"骁龙8 Gen1、2K、4600mAh、120W", reason:"大屏快充旗舰"},
+{brand:"小米", name:"小米12X", price:550, need:"轻薄", spec:"骁龙870、小屏、4500mAh、67W", reason:"发热低，体验稳定"},
+{brand:"小米", name:"小米12S", price:500, need:"轻薄", spec:"骁龙8+ Gen1、小屏、4500mAh、67W", reason:"发热控制极好"},
+{brand:"小米", name:"小米12S Pro", price:650, need:"拍照", spec:"骁龙8+ Gen1、2K、4600mAh、120W、徕卡", reason:"徕卡影像，性能稳"},
+{brand:"小米", name:"小米12S Ultra", price:1200, need:"拍照", spec:"骁龙8+ Gen1、2K、4860mAh、67W、徕卡一英寸", reason:"真·徕卡旗舰"},
+{brand:"小米", name:"小米13", price:880, need:"游戏", spec:"骁龙8 Gen2、小屏直屏、4500mAh、67W、徕卡", reason:"手感一流，游戏稳"},
+{brand:"小米", name:"小米13 Pro", price:950, need:"拍照", spec:"骁龙8 Gen2、2K曲面、4820mAh、120W、徕卡", reason:"影像+性能双旗舰"},
+{brand:"小米", name:"小米13 Ultra", price:1800, need:"拍照", spec:"骁龙8 Gen2、2K、5000mAh、90W、徕卡四摄", reason:"专业影像旗舰"},
+{brand:"小米", name:"小米14", price:1300, need:"拍照", spec:"骁龙8 Gen3、小屏旗舰、IP68、徕卡", reason:"最新小屏，性能全能"},
+{brand:"小米", name:"小米14 Pro", price:1600, need:"拍照", spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡", reason:"大屏全能旗舰"},
+{brand:"小米", name:"小米14 Ultra", price:2000, need:"拍照", spec:"骁龙8 Gen3、2K、5300mAh、90W、专业徕卡", reason:"顶级影像旗舰"},
+{brand:"小米", name:"小米15", price:2200, need:"均衡", spec:"骁龙8至尊版、6.36英寸1.5K直屏、5400mAh+90W有线/50W无线", reason:"小屏旗舰，手感均衡"},
+{brand:"小米", name:"小米15 Pro", price:2600, need:"拍照", spec:"骁龙8至尊版、6.73英寸2K微曲屏、6100mAh+90W有线/50W无线", reason:"续航影像，全能旗舰"},
+{brand:"小米", name:"小米15 Ultra", price:4000, need:"拍照", spec:"骁龙8至尊版、6.73英寸2K微曲屏、6000mAh+90W有线/80W无线、徕卡四摄（含
