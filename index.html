@@ -63,24 +63,213 @@ button:hover{background:#3367d6}
 <script>
 const phones = [
 // ====================== 小米数字系列 ======================
-{brand:"小米", name:"小米10", price:380, need:"均衡", spec:"骁龙865、90Hz AMOLED、4780mAh、30W", reason:"经典旗舰，性价比极高"},
-{brand:"小米", name:"小米10 Pro", price:450, need:"拍照", spec:"骁龙865、120Hz、4500mAh、50W", reason:"当年顶级影像旗舰"},
-{brand:"小米", name:"小米10 Ultra", price:500, need:"拍照", spec:"骁龙865、120Hz、4500mAh、120W", reason:"小米初代影像机皇"},
-{brand:"小米", name:"小米11", price:380, need:"均衡", spec:"骁龙888、2K 120Hz、4600mAh、55W", reason:"2K屏旗舰，手感轻薄"},
-{brand:"小米", name:"小米11 Pro", price:450, need:"续航", spec:"骁龙888、2K、5000mAh、67W", reason:"大电池，散热更强"},
-{brand:"小米", name:"小米11 Ultra", price:650, need:"拍照", spec:"骁龙888、2K、5000mAh、67W、三主摄", reason:"安卓影像机皇"},
-{brand:"小米", name:"小米12", price:500, need:"轻薄", spec:"骁龙8 Gen1、小屏、4500mAh、67W", reason:"手感轻薄，小屏旗舰"},
-{brand:"小米", name:"小米12 Pro", price:500, need:"均衡", spec:"骁龙8 Gen1、2K、4600mAh、120W", reason:"大屏快充旗舰"},
-{brand:"小米", name:"小米12X", price:550, need:"轻薄", spec:"骁龙870、小屏、4500mAh、67W", reason:"发热低，体验稳定"},
-{brand:"小米", name:"小米12S", price:500, need:"轻薄", spec:"骁龙8+ Gen1、小屏、4500mAh、67W", reason:"发热控制极好"},
-{brand:"小米", name:"小米12S Pro", price:650, need:"拍照", spec:"骁龙8+ Gen1、2K、4600mAh、120W、徕卡", reason:"徕卡影像，性能稳"},
-{brand:"小米", name:"小米12S Ultra", price:1200, need:"拍照", spec:"骁龙8+ Gen1、2K、4860mAh、67W、徕卡一英寸", reason:"真·徕卡旗舰"},
-{brand:"小米", name:"小米13", price:880, need:"游戏", spec:"骁龙8 Gen2、小屏直屏、4500mAh、67W、徕卡", reason:"手感一流，游戏稳"},
-{brand:"小米", name:"小米13 Pro", price:950, need:"拍照", spec:"骁龙8 Gen2、2K曲面、4820mAh、120W、徕卡", reason:"影像+性能双旗舰"},
-{brand:"小米", name:"小米13 Ultra", price:1800, need:"拍照", spec:"骁龙8 Gen2、2K、5000mAh、90W、徕卡四摄", reason:"专业影像旗舰"},
-{brand:"小米", name:"小米14", price:1300, need:"拍照", spec:"骁龙8 Gen3、小屏旗舰、IP68、徕卡", reason:"最新小屏，性能全能"},
-{brand:"小米", name:"小米14 Pro", price:1600, need:"拍照", spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡", reason:"大屏全能旗舰"},
-{brand:"小米", name:"小米14 Ultra", price:2000, need:"拍照", spec:"骁龙8 Gen3、2K、5300mAh、90W、专业徕卡", reason:"顶级影像旗舰"},
-{brand:"小米", name:"小米15", price:2200, need:"均衡", spec:"骁龙8至尊版、6.36英寸1.5K直屏、5400mAh+90W有线/50W无线", reason:"小屏旗舰，手感均衡"},
-{brand:"小米", name:"小米15 Pro", price:2600, need:"拍照", spec:"骁龙8至尊版、6.73英寸2K微曲屏、6100mAh+90W有线/50W无线", reason:"续航影像，全能旗舰"},
-{brand:"小米", name:"小米15 Ultra", price:4000, need:"拍照", spec:"骁龙8至尊版、6.73英寸2K微曲屏、6000mAh+90W有线/80W无线、徕卡四摄（含
+{brand:"小米", name:"小米10", price:380, spec:"骁龙865、90Hz AMOLED、4780mAh、30W", reason:"经典旗舰，性价比极高"},
+{brand:"小米", name:"小米10 Pro", price:450, spec:"骁龙865、120Hz、4500mAh、50W", reason:"当年顶级影像旗舰"},
+{brand:"小米", name:"小米10 Ultra", price:500, spec:"骁龙865、120Hz、4500mAh、120W", reason:"小米初代影像机皇"},
+{brand:"小米", name:"小米11", price:380, spec:"骁龙888、2K 120Hz、4600mAh、55W", reason:"2K屏旗舰，手感轻薄"},
+{brand:"小米", name:"小米11 Pro", price:450, spec:"骁龙888、2K、5000mAh、67W", reason:"大电池，散热更强"},
+{brand:"小米", name:"小米11 Ultra", price:650, spec:"骁龙888、2K、5000mAh、67W、三主摄", reason:"安卓影像机皇"},
+{brand:"小米", name:"小米12", price:500, spec:"骁龙8 Gen1、小屏、4500mAh、67W", reason:"手感轻薄，小屏旗舰"},
+{brand:"小米", name:"小米12 Pro", price:500, spec:"骁龙8 Gen1、2K、4600mAh、120W", reason:"大屏快充旗舰"},
+{brand:"小米", name:"小米12X", price:550, spec:"骁龙870、小屏、4500mAh、67W", reason:"发热低，体验稳定"},
+{brand:"小米", name:"小米12S", price:500, spec:"骁龙8+ Gen1、小屏、4500mAh、67W", reason:"发热控制极好"},
+{brand:"小米", name:"小米12S Pro", price:650, spec:"骁龙8+ Gen1、2K、4600mAh、120W、徕卡", reason:"徕卡影像，性能稳"},
+{brand:"小米", name:"小米12S Ultra", price:1200, spec:"骁龙8+ Gen1、2K、4860mAh、67W、徕卡一英寸", reason:"真·徕卡旗舰"},
+{brand:"小米", name:"小米13", price:880, spec:"骁龙8 Gen2、小屏直屏、4500mAh、67W、徕卡", reason:"手感一流，游戏稳"},
+{brand:"小米", name:"小米13 Pro", price:950, spec:"骁龙8 Gen2、2K曲面、4820mAh、120W、徕卡", reason:"影像+性能双旗舰"},
+{brand:"小米", name:"小米13 Ultra", price:1800, spec:"骁龙8 Gen2、2K、5000mAh、90W、徕卡四摄", reason:"专业影像旗舰"},
+{brand:"小米", name:"小米14", price:1300, spec:"骁龙8 Gen3、小屏旗舰、IP68、徕卡", reason:"最新小屏，性能全能"},
+{brand:"小米", name:"小米14 Pro", price:1600, spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡", reason:"大屏全能旗舰"},
+{brand:"小米", name:"小米14 Ultra", price:2000, spec:"骁龙8 Gen3、2K、5300mAh、90W、专业徕卡", reason:"顶级影像旗舰"},
+{brand:"小米", name:"小米15", price:2200, spec:"骁龙8至尊版、6.36英寸1.5K直屏、5400mAh+90W有线/50W无线", reason:"小屏旗舰，手感均衡"},
+{brand:"小米", name:"小米15 Pro", price:2600, spec:"骁龙8至尊版、6.73英寸2K微曲屏、6100mAh+90W有线/50W无线", reason:"续航影像，全能旗舰"},
+{brand:"小米", name:"小米15 Ultra", price:4000, spec:"骁龙8至尊版、6.73英寸2K微曲屏、6000mAh+90W有线/80W无线、徕卡四摄（含2亿像素长焦）", reason:"徕卡加持，影像巅峰"},
+{brand:"小米", name:"小米15S Pro", price:2500, spec:"玄界O1、全能旗舰", reason:"性能够用"},
+{brand:"小米", name:"小米17", price:3250, spec:"骁龙第五代8至尊版、1.5K直屏、7000mAh+100W快充", reason:"小屏旗舰，续航够用"},
+{brand:"小米", name:"小米17 Pro", price:4000, spec:"骁龙第五代8至尊版、1.5K直屏、6300mAh+100W快充、妙享背屏", reason:"妙享背屏，续航优秀"},
+{brand:"小米", name:"小米17 Pro Max", price:4500, spec:"骁龙第五代8至尊版、2K直屏、7500mAh+100W快充、妙享背屏", reason:"妙享背屏，续航够用，性能强劲"},
+
+// ====================== 红米 K 系列 ======================
+{brand:"红米", name:"Redmi K30 Ultra", price:260, spec:"天玑1000+、120Hz LCD、4500mAh", reason:"千元神机，LCD屏"},
+{brand:"红米", name:"Redmi K30S 至尊版", price:300, spec:"骁龙865、144Hz LCD、5000mAh", reason:"续航狂魔，LCD护眼"},
+{brand:"红米", name:"Redmi K40", price:320, spec:"骁龙870、120Hz E4、4520mAh", reason:"性价比神U，屏幕优秀"},
+{brand:"红米", name:"Redmi K40 Pro", price:400, spec:"骁龙888、120Hz、4520mAh", reason:"性能更强"},
+{brand:"红米", name:"Redmi K40S", price:380, spec:"骁龙870、VC散热、67W快充", reason:"散热升级，更稳"},
+{brand:"红米", name:"Redmi K50", price:450, spec:"天玑8100、2K 120Hz、5500mAh", reason:"续航超强，2K直屏"},
+{brand:"红米", name:"Redmi K50 Pro", price:520, spec:"天玑9000、5000mAh、120W", reason:"百瓦快充，性能旗舰"},
+{brand:"红米", name:"Redmi K50 电竞版", price:550, spec:"骁龙8 Gen1、磁泵散热、120Hz", reason:"游戏专门调校"},
+{brand:"红米", name:"Redmi K60", price:680, spec:"骁龙8+ Gen1、2K高光屏、5500mAh", reason:"2K屏+长续航"},
+{brand:"红米", name:"Redmi K60 Pro", price:750, spec:"骁龙8 Gen2、2K、120W快充", reason:"性能小钢炮"},
+{brand:"红米", name:"Redmi K60 至尊版", price:850, spec:"天玑9200+、狂暴性能、1.5K", reason:"性价比游戏旗舰"},
+{brand:"红米", name:"Redmi K70", price:950, spec:"骁龙8 Gen2、2K高光屏、5500mAh、120W", reason:"质感、屏幕、续航全拉满"},
+{brand:"红米", name:"Redmi K70E", price:750, spec:"天玑8300、1.5K、5500mAh、90W", reason:"长续航性价比神机"},
+{brand:"红米", name:"Redmi K70 Pro", price:1100, spec:"骁龙8 Gen3、2K、120W、旗舰影像", reason:"旗舰下放"},
+{brand:"红米", name:"Redmi K70 至尊版", price:1300, spec:"天玑9300+、电竞级散热、1.5K", reason:"最强性能K系列"},
+{brand:"红米", name:"Redmi K80", price:1500, spec:"新一代旗舰芯、2K、百瓦快充", reason:"未来性价比旗舰"},
+{brand:"红米", name:"Redmi K80 Pro", price:1700, spec:"顶级性能、全焦段影像", reason:"未来旗舰"},
+{brand:"红米", name:"Redmi K90", price:1800, spec:"下一代旗舰芯片、全面升级", reason:"未来电竞旗舰"},
+{brand:"红米", name:"Redmi K90 Pro", price:2100, spec:"顶级性能、顶级屏幕、顶级快充", reason:"未来旗舰"},
+
+// ====================== 红米 Turbo 系列 ======================
+{brand:"红米", name:"Redmi Turbo 3", price:650, spec:"骁龙8s Gen3、1.5K、5000mAh、90W", reason:"性能小钢炮"},
+{brand:"红米", name:"Redmi Turbo 4", price:800, spec:"骁龙8 Gen2 升级版、1.5K、百瓦快充", reason:"游戏性价比神机"},
+{brand:"红米", name:"Redmi Turbo 5", price:950, spec:"骁龙8s Gen4、1.5K、5500mAh、100W", reason:"新一代性能神机"},
+
+// ====================== OPPO Find X 系列 ======================
+{brand:"OPPO", name:"Find X2", price:400, spec:"骁龙865、2K 120Hz、4200mAh、65W", reason:"2K屏旗舰"},
+{brand:"OPPO", name:"Find X2 Pro", price:480, spec:"骁龙865、2K、4200mAh、65W、双主摄", reason:"顶级屏幕+影像"},
+{brand:"OPPO", name:"Find X3", price:450, spec:"骁龙870、2K、4500mAh、65W、显微镜头", reason:"色彩影像旗舰"},
+{brand:"OPPO", name:"Find X3 Pro", price:520, spec:"骁龙888、2K、4500mAh、65W", reason:"全焦段影像"},
+{brand:"OPPO", name:"Find X5", price:600, spec:"骁龙888、2K、4800mAh、80W、马里亚纳", reason:"自研芯片影像"},
+{brand:"OPPO", name:"Find X5 Pro", price:750, spec:"骁龙8 Gen1、2K、5000mAh、80W", reason:"高端影像旗舰"},
+{brand:"OPPO", name:"Find X6", price:1100, spec:"天玑9200、1.5K、4800mAh、100W、超光潜望", reason:"长焦影像旗舰"},
+{brand:"OPPO", name:"Find X6 Pro", price:1400, spec:"骁龙8 Gen2、2K、5000mAh、100W、一英寸", reason:"顶级影像旗舰"},
+{brand:"OPPO", name:"Find X7", price:1600, spec:"骁龙8 Gen3、1.5K、5000mAh、100W", reason:"全能旗舰"},
+{brand:"OPPO", name:"Find X7 Ultra", price:2200, spec:"骁龙8 Gen3、全焦段、一英寸、百瓦快充", reason:"影像机皇"},
+{brand:"OPPO", name:"Find X8", price:2000, spec:"新一代旗舰芯、全焦段影像", reason:"未来旗舰"},
+{brand:"OPPO", name:"Find X8 Pro", price:2400, spec:"顶级芯片、顶级屏幕、顶级影像", reason:"未来高端旗舰"},
+{brand:"OPPO", name:"Find X9", price:2600, spec:"下一代旗舰、全面升级", reason:"未来影像旗舰"},
+{brand:"OPPO", name:"Find X9 Pro", price:3000, spec:"未来顶级配置、无短板旗舰", reason:"未来机皇"},
+
+// ====================== OPPO Reno 系列 ======================
+{brand:"OPPO", name:"Reno 5", price:260, spec:"骁龙765G、轻薄机身、65W快充", reason:"颜值轻薄"},
+{brand:"OPPO", name:"Reno 6", price:280, spec:"天玑900、轻薄、65W", reason:"美颜拍照"},
+{brand:"OPPO", name:"Reno 7", price:300, spec:"骁龙778G、轻薄、60W", reason:"手感优秀"},
+{brand:"OPPO", name:"Reno 8", price:350, spec:"天玑1300、80W快充、轻薄机身", reason:"续航快充升级"},
+{brand:"OPPO", name:"Reno 9", price:400, spec:"骁龙7+ Gen2、1.5K、80W", reason:"性能颜值兼顾"},
+{brand:"OPPO", name:"Reno 10", price:450, spec:"骁龙7+ Gen3、长焦、100W", reason:"人像长焦轻薄旗舰"},
+{brand:"OPPO", name:"Reno 11", price:550, spec:"骁龙8+ Gen1、1.5K、100W", reason:"性能轻薄旗舰"},
+{brand:"OPPO", name:"Reno 12", price:650, spec:"新一代中端旗舰、轻薄长续航", reason:"未来轻薄旗舰"},
+
+// ====================== vivo S / X 系列 ======================
+{brand:"vivo", name:"X60", price:320, spec:"骁龙870、微云台、4200mAh、33W", reason:"微云台防抖"},
+{brand:"vivo", name:"X60 Pro+", price:420, spec:"骁龙888、微云台双主摄、55W", reason:"高端影像"},
+{brand:"vivo", name:"X70", price:380, spec:"天玑1200、蔡司、微云台、44W", reason:"蔡司认证影像"},
+{brand:"vivo", name:"X70 Pro+", price:550, spec:"骁龙888+、蔡司四摄、55W", reason:"顶级影像"},
+{brand:"vivo", name:"X80", price:650, spec:"天玑9000、蔡司、120Hz、80W", reason:"天玑影像旗舰"},
+{brand:"vivo", name:"X80 Pro", price:800, spec:"骁龙8 Gen1、蔡司、一英寸、80W", reason:"高端旗舰"},
+{brand:"vivo", name:"X90", price:900, spec:"天玑9200、蔡司、120Hz、120W", reason:"性能影像双旗舰"},
+{brand:"vivo", name:"X90 Pro+", price:1300, spec:"骁龙8 Gen2、蔡司一英寸、120W", reason:"顶级影像"},
+{brand:"vivo", name:"X100", price:1400, spec:"天玑9300、蔡司长焦、120W", reason:"全能长焦旗舰"},
+{brand:"vivo", name:"X100 Ultra", price:2100, spec:"骁龙8 Gen3、全焦段、一英寸、百瓦快充", reason:"影像机皇"},
+{brand:"vivo", name:"X200", price:2300, spec:"新一代旗舰芯、蔡司全焦段", reason:"未来旗舰"},
+{brand:"vivo", name:"X300", price:2800, spec:"未来顶级影像、全面升级", reason:"未来顶级旗舰"},
+
+// ====================== iQOO 数字 + Neo 系列 ======================
+{brand:"iQOO", name:"iQOO 5", price:400, spec:"骁龙865、120Hz、4500mAh、55W", reason:"游戏直屏旗舰"},
+{brand:"iQOO", name:"iQOO 7", price:450, spec:"骁龙888、120Hz、4000mAh、120W", reason:"百瓦快充游戏"},
+{brand:"iQOO", name:"iQOO 8", price:500, spec:"骁龙888+、120Hz、4500mAh、120W", reason:"直屏游戏旗舰"},
+{brand:"iQOO", name:"iQOO 9", price:650, spec:"骁龙8 Gen1、120Hz E5、4700mAh、120W", reason:"电竞级游戏"},
+{brand:"iQOO", name:"iQOO 10", price:800, spec:"骁龙8+ Gen1、120Hz、5000mAh、120W", reason:"稳帧游戏旗舰"},
+{brand:"iQOO", name:"iQOO 11", price:950, spec:"骁龙8 Gen2、2K 120Hz、5000mAh、120W", reason:"电竞屏旗舰"},
+{brand:"iQOO", name:"iQOO 12", price:1300, spec:"骁龙8 Gen3、1.5K、5000mAh、120W、长焦", reason:"游戏+影像全能"},
+{brand:"iQOO", name:"iQOO 13", price:1600, spec:"新一代旗舰芯、电竞级配置", reason:"未来电竞旗舰"},
+{brand:"iQOO", name:"iQOO Neo3", price:300, spec:"骁龙865、144Hz LCD、4500mAh", reason:"LCD高刷游戏"},
+{brand:"iQOO", name:"iQOO Neo5", price:350, spec:"骁龙870、120Hz、4400mAh、66W", reason:"独显游戏"},
+{brand:"iQOO", name:"iQOO Neo6", price:450, spec:"骁龙8 Gen1、120Hz、4700mAh、80W", reason:"性能游戏"},
+{brand:"iQOO", name:"iQOO Neo7", price:550, spec:"天玑8200、120Hz、5000mAh、120W", reason:"长续航游戏"},
+{brand:"iQOO", name:"iQOO Neo8", price:700, spec:"骁龙8+ Gen1、1.5K、120W、独显", reason:"直屏性能神机"},
+{brand:"iQOO", name:"iQOO Neo9", price:850, spec:"骁龙8 Gen2、1.5K、5500mAh、120W", reason:"性能小旗舰"},
+{brand:"iQOO", name:"iQOO Neo10", price:1000, spec:"新一代旗舰芯、电竞级游戏", reason:"未来游戏神机"},
+
+// ====================== 一加 数字 + Ace 系列 ======================
+{brand:"一加", name:"一加8T", price:320, spec:"骁龙865、120Hz直屏、4500mAh、65W", reason:"直屏手感旗舰"},
+{brand:"一加", name:"一加9", price:380, spec:"骁龙888、120Hz、4500mAh、65W、哈苏", reason:"哈苏影像"},
+{brand:"一加", name:"一加9R", price:350, spec:"骁龙870、120Hz、4500mAh、65W", reason:"稳帧游戏"},
+{brand:"一加", name:"一加10", price:500, spec:"骁龙8 Gen1、120Hz、5000mAh、80W", reason:"长续航游戏"},
+{brand:"一加", name:"一加11", price:750, spec:"骁龙8 Gen2、2K、5000mAh、100W", reason:"性能无短板"},
+{brand:"一加", name:"一加12", price:1100, spec:"骁龙8 Gen3、1.5K、5400mAh、100W、哈苏", reason:"全能旗舰"},
+{brand:"一加", name:"一加13", price:1500, spec:"新一代旗舰芯、哈苏全焦段", reason:"未来旗舰"},
+{brand:"一加", name:"一加14", price:1900, spec:"顶级性能、顶级影像", reason:"未来高端旗舰"},
+{brand:"一加", name:"一加15", price:2300, spec:"未来顶级配置、全面升级", reason:"未来机皇"},
+{brand:"一加", name:"一加 Ace", price:450, spec:"天玑8100、120Hz、5000mAh、150W", reason:"超高快充"},
+{brand:"一加", name:"一加 Ace 2", price:550, spec:"骁龙8+ Gen1、1.5K、5000mAh、100W", reason:"性能神机"},
+{brand:"一加", name:"一加 Ace 3", price:680, spec:"骁龙8 Gen2、1.5K、5500mAh、100W", reason:"长续航性能"},
+{brand:"一加", name:"一加 Ace 4", price:850, spec:"骁龙8 Gen3 降频版、1.5K、100W", reason:"未来性价比"},
+{brand:"一加", name:"一加 Ace 5", price:1000, spec:"新一代性能芯、电竞级体验", reason:"未来游戏神机"},
+{brand:"一加", name:"一加 Ace 6", price:1200, spec:"顶级性能、直屏旗舰", reason:"未来性能旗舰"},
+
+// ====================== 苹果 12 ~ 17 系列 ======================
+{brand:"苹果", name:"iPhone 12", price:850, spec:"A14、iOS、6.1英寸、耐用流畅", reason:"系统流畅，耐用"},
+{brand:"苹果", name:"iPhone 12 Pro", price:1100, spec:"A14、三摄、6.1英寸、不锈钢边框", reason:"影像旗舰"},
+{brand:"苹果", name:"iPhone 12 Pro Max", price:1300, spec:"A14、大屏、长焦、大底", reason:"大屏影像"},
+{brand:"苹果", name:"iPhone 13", price:1100, spec:"A15、6.1英寸、长续航、防抖", reason:"续航提升明显"},
+{brand:"苹果", name:"iPhone 13 Pro", price:1400, spec:"A15、120Hz、三摄、长焦", reason:"高刷旗舰"},
+{brand:"苹果", name:"iPhone 13 Pro Max", price:1600, spec:"A15、大屏、超长续航", reason:"续航之王"},
+{brand:"苹果", name:"iPhone 14", price:1300, spec:"A15、6.1英寸、防抖、车祸检测", reason:"稳定耐用"},
+{brand:"苹果", name:"iPhone 14 Pro", price:1800, spec:"A16、灵动岛、4800万、120Hz", reason:"灵动岛初代"},
+{brand:"苹果", name:"iPhone 15", price:1900, spec:"A16、6.1英寸、Type‑C、4800万", reason:"均衡实用"},
+{brand:"苹果", name:"iPhone 15 Pro", price:2400, spec:"A17 Pro、钛金属、游戏、长焦", reason:"性能旗舰"},
+{brand:"苹果", name:"iPhone 16", price:2300, spec:"A18、6.1英寸、升级相机、智能按键", reason:"新一代标准版"},
+{brand:"苹果", name:"iPhone 16 Pro", price:2900, spec:"A18 Pro、钛金属、全焦段", reason:"高端旗舰"},
+{brand:"苹果", name:"iPhone 17", price:2600, spec:"A19、全面升级、长续航", reason:"未来标准版"},
+{brand:"苹果", name:"iPhone 17 Pro", price:3400, spec:"A19 Pro、未来顶级配置", reason:"未来顶级旗舰"},
+
+// ====================== 华为 Mate + P 系列 ======================
+{brand:"华为", name:"Mate 40", price:800, spec:"麒麟9000、90Hz、4200mAh、40W", reason:"经典麒麟旗舰"},
+{brand:"华为", name:"Mate 40 Pro", price:1100, spec:"麒麟9000、星环三摄、66W", reason:"经典高端旗舰"},
+{brand:"华为", name:"Mate 50", price:1200, spec:"骁龙8+ Gen1、可变光圈、66W", reason:"北斗消息"},
+{brand:"华为", name:"Mate 50 Pro", price:1500, spec:"骁龙8+ Gen1、可变光圈、80W", reason:"高端旗舰"},
+{brand:"华为", name:"Mate 60", price:1800, spec:"麒麟旗舰、卫星消息、88W", reason:"国产旗舰标杆"},
+{brand:"华为", name:"Mate 60 Pro", price:2300, spec:"麒麟旗舰、全焦段、卫星通话", reason:"全能旗舰"},
+{brand:"华为", name:"Mate 70", price:2600, spec:"新一代麒麟、全面升级", reason:"未来旗舰"},
+{brand:"华为", name:"Mate 80", price:3200, spec:"未来顶级麒麟、全能无短板", reason:"未来机皇"},
+{brand:"华为", name:"P40", price:550, spec:"麒麟990、徕卡三摄、22.5W", reason:"经典小屏影像"},
+{brand:"华为", name:"P40 Pro", price:700, spec:"麒麟990、徕卡四摄、40W", reason:"顶级拍照"},
+{brand:"华为", name:"P50", price:900, spec:"骁龙888、原色影像、66W", reason:"计算摄影"},
+{brand:"华为", name:"P50 Pro", price:1100, spec:"骁龙888、原色双影像、66W", reason:"高端影像"},
+{brand:"华为", name:"P60", price:1500, spec:"骁龙8+ Gen1、可变光圈、88W", reason:"夜视长焦"},
+{brand:"华为", name:"P70", price:1900, spec:"麒麟旗舰、超聚光影像", reason:"新一代影像"},
+{brand:"华为", name:"Pura 70", price:2200, spec:"超光潜望、全焦段、百瓦快充", reason:"Pura旗舰"},
+{brand:"华为", name:"Pura 80", price:2700, spec:"未来顶级影像、全面升级", reason:"未来影像旗舰"}
+];
+
+let currentList = [];
+
+function filterPhone() {
+  const key = (document.getElementById("keyword").value || "").toLowerCase();
+  const brand = document.getElementById("brand").value;
+  let min = parseInt(document.getElementById("minPrice").value) || 0;
+  let max = parseInt(document.getElementById("maxPrice").value) || 99999;
+
+  currentList = phones.filter(p => 
+    (brand === "全部" || p.brand === brand) &&
+    (p.price >= min && p.price <= max) &&
+    (p.name.toLowerCase().includes(key) || p.spec.toLowerCase().includes(key))
+  );
+
+  const result = document.getElementById("result");
+  if (currentList.length === 0) {
+    result.innerHTML = "<p>暂无匹配机型</p>";
+    return;
+  }
+
+  result.innerHTML = `
+    <div class="phone-list">
+      ${currentList.map((p, i) => `
+        <div class="phone-item" onclick="showDetail(${i})">
+          <div class="phone-name">${p.name}</div>
+          <div class="phone-spec">${p.price}元 | ${p.spec.slice(0, 24)}...</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function showDetail(index) {
+  const p = currentList[index];
+  document.getElementById("detailContent").innerHTML = `
+    <h3>${p.name}</h3>
+    <p><strong>价格：</strong>${p.price}元（闲鱼参考）</p>
+    <p><strong>配置：</strong>${p.spec}</p>
+    <p><strong>推荐理由：</strong>${p.reason}</p>
+  `;
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+</body>
+</html>
