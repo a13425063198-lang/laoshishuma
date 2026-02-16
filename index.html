@@ -44,7 +44,7 @@ button:hover{background:#3367d6}
       <option value="一加">一加</option>
       <option value="OPPO">OPPO</option>
       <option value="vivo">vivo</option>
-      <option value="苹果">苹果</option>
+      <option value="苹果">苹果</option>                <option value="魅族">魅族</option> 
       <option value="华为">华为</option>
     </select>
     <div class="line-group">
@@ -62,7 +62,7 @@ button:hover{background:#3367d6}
 
   <button onclick="filterPhone()">开始筛选</button>
   <div id="result"></div>
-  <div class="tip">筛选仅供参考，只收录部分机型</div>
+  <div class="tip">筛选结果仅供参考，仅收录部分机型</div>
 </div>
 
 <div class="modal" id="modal">
@@ -122,9 +122,13 @@ const phones = [
 {brand:"红米",name:"Redmi Turbo 4Pro",price:1200,spec:"骁龙8s Gen4、1.5K直屏、7550mAh",reason:"续航很强，性价比高"},
 
 {brand:"OPPO",name:"OPPO Find X6",price:850,spec:"天机9200+、4800mAh",reason:"哈苏影像，旗舰性能"},
-{brand:"OPPO",name:"OPPO Reno 8Pro+",price:550,spec:"天机8100、OLED直屏、4500mAh",reason:"轻薄续航稳"},
-{brand:"OPPO",name:"OPPOReno9 Pro+",price:580,spec:"骁龙8+ Gen1、6.7英寸AMOLED、4500mAh、80W、马里亚纳MariSilicon X",reason:"影像性能均衡，颜值手感在线"},
-  
+
+{brand:"OPPO",name:"Reno8 Pro+",price:550,spec:"天玑8100-MAX、120Hz、4500mAh、80W",reason:"颜值在线"},
+{brand:"OPPO",name:"Reno9 Pro",price:570,spec:"天玑8100-MAX、120Hz、4500mAh、67W",reason:"流畅颜值备用机"},
+{brand:"OPPO",name:"Reno9 Pro+",price:590,spec:"骁龙8+ Gen1、120Hz、4700mAh、80W",reason:"轻薄曲面"},
+{brand:"OPPO",name:"Reno10 Pro",price:700,spec:"天玑8200、120Hz、4600mAh、80W",reason:"长焦，人像"},
+{brand:"OPPO",name:"Reno10 Pro+",price:950,spec:"骁龙8+ Gen1、120Hz、4700mAh、100W",reason:"潜望长焦"},
+
 {brand:"苹果",name:"iPhone 12 Pro",price:1200,spec:"A14、6.1英寸OLED、三摄、iOS",reason:"经典三摄，耐用性强"},
 {brand:"苹果",name:"iPhone 12 Pro Max",price:1000,spec:"A14、6.7英寸OLED、大底主摄、iOS",reason:"大屏影像旗舰，续航出色"},
 {brand:"苹果",name:"iPhone 13 Pro",price:1300,spec:"A15、ProMotion高刷、三摄、iOS",reason:"高刷体验，性能提升明显"},
