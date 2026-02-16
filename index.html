@@ -404,14 +404,31 @@ const phones = [
     {brand:"OPPO",name:"Reno9 Pro+",price:590,spec:"骁龙8+ Gen1、120Hz、4700mAh、80W",reason:"轻薄曲面"},
     {brand:"OPPO",name:"Reno10 Pro",price:700,spec:"天玑8200、120Hz、4600mAh、80W",reason:"长焦，人像"},
     {brand:"OPPO",name:"Reno10 Pro+",price:950,spec:"骁龙8+ Gen1、120Hz、4700mAh、100W",reason:"潜望长焦"},
-    {brand:"vivo",name:"vivo X80",price:680,spec:"天玑9000、120Hz、4500mAh、80W",reason:"影像出色，性价比高"},
-    {brand:"vivo",name:"vivo X90 Pro",price:1100,spec:"天玑9200、120Hz、4870mAh、120W",reason:"蔡司影像，人像优秀"},
-    {brand:"vivo",name:"vivo X100 Pro",price:1500,spec:"天玑9300、120Hz、5400mAh、100W",reason:"长焦微距，影像旗舰"},
-    {brand:"vivo",name:"vivo X80 Pro",price:850,spec:"骁龙8 Gen1、2K LTPO、4700mAh、80W",reason:"蔡司影像旗舰"},
-    {brand:"vivo",name:"vivo X90",price:950,spec:"天玑9200、120Hz、4810mAh、120W",reason:"性能均衡，影像不错"},
-    {brand:"vivo",name:"vivo X100",price:1250,spec:"天玑9300、120Hz、5000mAh、120W",reason:"性能强劲，续航优秀"},
-    {brand:"苹果",name:"iPhone 12 Pro",price:1200,spec:"A14、6.1英寸OLED、三摄、iOS",reason:"经典三摄，耐用性强"},
-    {brand:"苹果",name:"iPhone 12 Pro Max",price:1000,spec:"A14、6.7英寸OLED、大底主摄、iOS",reason:"大屏影像旗舰，续航出色"},
+
+{brand:"vivo",name:"X80",price:550,spec:"天玑9000、120Hz、4500mAh、80W",reason:"蔡司影像旗舰"},
+{brand:"vivo",name:"X80 Pro",price:750,spec:"骁龙8 Gen1、120Hz LTPO、4700mAh、80W",reason:"蔡司T*光学镜头"},
+ 
+{brand:"vivo",name:"X90",price:800,spec:"天玑9200、120Hz、4810mAh、120W",reason:"自研V1+芯片影像"},
+{brand:"vivo",name:"X90 Pro",price:1100,spec:"骁龙8 Gen2、120Hz LTPO、4870mAh、120W",reason:"一英寸主摄"},
+{brand:"vivo",name:"X90 Pro+",price:1350,spec:"骁龙8 Gen2、120Hz LTPO、4870mAh、80W",reason:"蔡司全焦段"},
+ 
+{brand:"vivo",name:"X100",price:1400,spec:"天玑9300、120Hz、5400mAh、120W",reason:"V3影像芯片+蓝海电池"},
+{brand:"vivo",name:"X100 Pro",price:2000,spec:"天玑9300、120Hz LTPO、5400mAh、120W",reason:"蔡司APO长焦"},
+{brand:"vivo",name:"X100 Ultra",price:2800,spec:"天玑9300+、120Hz LTPO、5600mAh、120W",reason:"一英寸潜望长焦"},
+ 
+{brand:"vivo",name:"X100S",price:1600,spec:"天玑9300+、120Hz、5400mAh、120W",reason:"性能续航"},
+{brand:"vivo",name:"X100S Pro",price:2200,spec:"天玑9300+、120Hz LTPO、5400mAh、120W",reason:"影像算法增强"},
+ 
+{brand:"vivo",name:"X200",price:2200,spec:"天玑9400、120Hz、5600mAh、120W",reason:"V4影像芯片+轻薄"},
+{brand:"vivo",name:"X200 Pro",price:2900,spec:"天玑9400、120Hz LTPO、5600mAh、120W",reason:"全焦段蔡司旗舰"},
+{brand:"vivo",name:"X200 Ultra",price:3999,spec:"天玑9400+、120Hz LTPO、5800mAh、120W",reason:"顶级影像"},
+ 
+{brand:"vivo",name:"X300",price:2800,spec:"天玑9500、120Hz、5800mAh、120W",reason:"全能旗舰"},
+{brand:"vivo",name:"X300 Pro",price:3600,spec:"天玑9500、120Hz LTPO、5800mAh、120W+50W无线",reason:"V5影像+长续航"},
+{brand:"vivo",name:"X300 Ultra",price:4809,spec:"天玑9500+、120Hz LTPO、6000mAh、120W+80W无线",reason:"vivo影像天花板"}，
+
+    {brand:"苹果",name:"iPhone 12 Pro",price:1100,spec:"A14、6.1英寸OLED、三摄、iOS",reason:"经典三摄，耐用性强"},
+    {brand:"苹果",name:"iPhone 12 Pro Max",price:1250,spec:"A14、6.7英寸OLED、大底主摄、iOS",reason:"大屏影像旗舰，续航出色"},
     {brand:"苹果",name:"iPhone 13 Pro",price:1300,spec:"A15、ProMotion高刷、三摄、iOS",reason:"高刷体验，性能提升明显"},
     {brand:"苹果",name:"iPhone 13 Pro Max",price:1350,spec:"A15、6.7英寸高刷、大电池、iOS",reason:"续航天花板，影像升级"},
     {brand:"苹果",name:"iPhone 14 Pro",price:2100,spec:"A16、灵动岛、4800万主摄、iOS",reason:"灵动岛交互，影像大升级"},
@@ -462,12 +479,12 @@ function useHistory(w) {
 
 const tips = [
     "二手手机优先看电池健康，85%以上更耐用",
-    "骁龙870/天玑8100 是千元档神U，发热低",
+    "骁龙870/天玑8100 百元档神U，发热低",
     "2K屏更清晰，但更耗电，1.5K是均衡选择",
     "百瓦快充虽然快，但长期会略微加速电池老化",
     "LCD屏护眼，OLED色彩好，看需求选择",
-    "买二手尽量走平台验机，避免暗病",
-    "骁龙8+、骁龙8 Gen2 是目前性价比最高的两代芯片"
+    "买二手尽量走平台，避免骗子",
+    "骁龙8+、骁龙8 Gen2 是比较有性价比的芯片"
 ];
 function showRandomTip() {
     document.getElementById('tipBar').innerText = "💡 "+tips[Math.floor(Math.random()*tips.length)];
