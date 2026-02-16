@@ -3,206 +3,793 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大湿数码推荐</title>
+<title>大湿数码推荐 - 二手手机选购助手</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft YaHei",sans-serif;font-weight:bold}
-body{background:#f5f5f5;padding:20px}
-.container{max-width:500px;margin:0 auto;background:#fff;padding:24px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-h1{text-align:center;margin-bottom:20px;font-size:22px}
-.filter{display:flex;flex-direction:column;gap:10px}
+:root {
+    --primary: #4a6cf7;
+    --primary-dark: #3a5ce5;
+    --secondary: #6c757d;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --border: #e0e0e0;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --radius: 10px;
+}
 
-.line-group{display:flex;align-items:center;gap:8px}
-.line-group select{width:120px;padding:12px;border-radius:8px;border:1px solid #ccc}
-.price-input{display:flex;gap:4px;flex:1}
-.price-input input{flex:1;padding:12px;border-radius:8px;border:1px solid #ccc}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
 
-input,select,button{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:16px}
-button{background:#4285f4;color:#fff;border:none;cursor:pointer}
-button:hover{background:#3367d6}
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    padding: 20px;
+    min-height: 100vh;
+}
 
-.phone-list{margin-top:20px;display:flex;flex-direction:column;gap:12px}
-.phone-item{background:#fafafa;padding:14px;border-radius:8px;border:1px solid #eee;cursor:pointer}
-.phone-name{font-size:17px;margin-bottom:6px}
-.phone-spec{font-size:14px;color:#333}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
 
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none;justify-content:center;align-items:center;padding:20px}
-.modal-content{background:#fff;padding:24px;border-radius:12px;max-width:400px;width:100%}
-.close{margin-top:16px;padding:10px;background:#eee;border:none;border-radius:8px;width:100%;cursor:pointer}
-.tip{margin-top:12px;font-size:12px;color:#999;text-align:center}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--light);
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--dark);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: var(--secondary);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-label {
+    font-size: 13px;
+    color: var(--dark);
+    font-weight: 600;
+}
+
+input, select, button {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
+}
+
+#keyword {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%236c757d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 16px;
+    padding-left: 36px;
+}
+
+.price-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.price-input {
+    flex: 1;
+    position: relative;
+}
+
+.price-input input {
+    width: 100%;
+}
+
+.price-separator {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.filter-btn {
+    flex: 1;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(74, 108, 247, 0.2);
+}
+
+.filter-btn:active {
+    transform: translateY(0);
+}
+
+.reset-btn {
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid var(--border);
+}
+
+.reset-btn:hover {
+    background: #e9ecef;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.result-count {
+    font-size: 13px;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.sort-options {
+    display: flex;
+    gap: 6px;
+}
+
+.sort-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sort-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.phone-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.phone-item {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.phone-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.brand-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(74, 108, 247, 0.1);
+    color: var(--primary);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.phone-name {
+    font-size: 16px;
+    color: var(--dark);
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.phone-price {
+    color: #e74c3c;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.phone-price::after {
+    content: '元';
+    font-size: 13px;
+    color: var(--secondary);
+    margin-left: 2px;
+}
+
+.phone-spec {
+    font-size: 13px;
+    color: var(--secondary);
+    line-height: 1.4;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.phone-reason {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--border);
+}
+
+.no-result {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--secondary);
+}
+
+.no-result-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.loading {
+    text-align: center;
+    padding: 30px;
+    color: var(--secondary);
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--light);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.2s ease;
+    position: relative;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--secondary);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.close-btn:hover {
+    background: var(--light);
+}
+
+.modal-spec {
+    background: var(--light);
+    padding: 14px;
+    border-radius: 6px;
+    margin: 14px 0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.modal-price {
+    font-size: 24px;
+    color: #e74c3c;
+    font-weight: 700;
+    margin: 16px 0;
+}
+
+.modal-reason {
+    background: rgba(74, 108, 247, 0.05);
+    padding: 14px;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary);
+    margin-top: 16px;
+    font-size: 13px;
+}
+
+/* 品牌颜色标签 */
+.brand-xiaomi { background: rgba(255, 103, 0, 0.1); color: #ff6700; }
+.brand-redmi { background: rgba(237, 28, 36, 0.1); color: #ed1c24; }
+.brand-apple { background: rgba(0, 0, 0, 0.1); color: #000; }
+.brand-oppo { background: rgba(0, 150, 238, 0.1); color: #0096ee; }
+.brand-oneplus { background: rgba(237, 28, 36, 0.1); color: #ed1c24; }
+.brand-vivo { background: rgba(0, 114, 187, 0.1); color: #0072bb; }
+.brand-meizu { background: rgba(0, 200, 83, 0.1); color: #00c853; }
+.brand-huawei { background: rgba(237, 28, 36, 0.1); color: #ed1c24; }
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .container {
+        padding: 16px;
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+    
+    .price-row {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .price-separator {
+        display: none;
+    }
+    
+    .filter-actions {
+        flex-direction: column;
+    }
+    
+    .modal-content {
+        padding: 20px 16px;
+    }
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>大湿数码推荐</h1>
-  <div class="filter">
-    <input type="text" id="keyword" placeholder="搜索：骁龙8 Gen2、直屏、LCD、游戏、续航、徕卡、哈苏">
-    <select id="brand">
-      <option value="全部">品牌：全部</option>
-      <option value="小米">小米</option>
-      <option value="红米">红米</option>
-      <option value="一加">一加</option>
-      <option value="OPPO">OPPO</option>
-      <option value="vivo">vivo</option>
-      <option value="苹果">苹果</option>                <option value="魅族">魅族</option> 
-      <option value="华为">华为</option>
-    </select>
-    <div class="line-group">
-      <select id="sortBy">
-        <option value="default">默认排序</option>
-        <option value="asc">价格低→高</option>
-        <option value="desc">价格高→低</option>
-      </select>
-      <div class="price-input">
-        <input type="number" id="minPrice" placeholder="最低">
-        <input type="number" id="maxPrice" placeholder="最高">
-      </div>
+    <div class="header">
+        <h1>📱 大湿数码推荐</h1>
+        <p class="subtitle">二手手机智能筛选平台</p>
     </div>
-  </div>
-
-  <button onclick="filterPhone()">开始筛选</button>
-  <div id="result"></div>
-  <div class="tip">筛选结果仅供参考，仅收录部分机型</div>
+    
+    <div class="filter">
+        <div class="filter-group">
+            <input type="text" id="keyword" placeholder="搜索手机型号或配置...">
+        </div>
+        
+        <div class="filter-group">
+            <select id="brand">
+                <option value="全部">所有品牌</option>
+                <option value="小米">小米</option>
+                <option value="红米">红米</option>
+                <option value="一加">一加</option>
+                <option value="OPPO">OPPO</option>
+                <option value="vivo">vivo</option>
+                <option value="苹果">苹果</option>
+                <option value="魅族">魅族</option>
+                <option value="华为">华为</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <div class="price-row">
+                <div class="price-input">
+                    <input type="number" id="minPrice" placeholder="最低价" min="0">
+                </div>
+                <span class="price-separator">-</span>
+                <div class="price-input">
+                    <input type="number" id="maxPrice" placeholder="最高价" min="0">
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-actions">
+            <button class="filter-btn" onclick="filterPhone()">
+                <span>🔍 搜索</span>
+            </button>
+            <button class="filter-btn reset-btn" onclick="resetFilters()">
+                <span>🔄 重置</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="result-header">
+        <div class="result-count" id="resultCount"></div>
+        <div class="sort-options">
+            <button class="sort-btn" onclick="sortPhones('default')" id="sortDefault">默认</button>
+            <button class="sort-btn" onclick="sortPhones('asc')" id="sortAsc">价格升序</button>
+            <button class="sort-btn" onclick="sortPhones('desc')" id="sortDesc">价格降序</button>
+        </div>
+    </div>
+    
+    <div id="result"></div>
 </div>
 
 <div class="modal" id="modal">
-  <div class="modal-content">
-    <div id="detailContent"></div>
-    <button class="close" onclick="closeModal()">关闭</button>
-  </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+        
+        <div class="brand-tag" id="modalBrand"></div>
+        
+        <div class="modal-price" id="modalPrice"></div>
+        
+        <div class="modal-spec" id="modalSpec"></div>
+        
+        <div class="modal-reason" id="modalReason"></div>
+    </div>
 </div>
 
 <script>
 const phones = [
-{brand:"小米",name:"小米10",price:380,spec:"骁龙865、90Hz AMOLED、4780mAh、30W",reason:"经典旗舰，性价比极高"},
-{brand:"小米",name:"小米10 Pro",price:370,spec:"骁龙865、120Hz、4500mAh、50W",reason:"当年旗舰"},
-{brand:"小米",name:"小米10s",price:400,spec:"骁龙870、4780mAh",reason:"音质无敌，性价比高"},
-{brand:"小米",name:"小米10 Ultra",price:480,spec:"骁龙865、120Hz、4500mAh、120W",reason:"小米初代影像机皇"},
-{brand:"小米",name:"小米11",price:370,spec:"骁龙888、2K 120Hz、4600mAh、55W",reason:"2K屏旗舰，手感轻薄"},
-{brand:"小米",name:"小米11 Pro",price:400,spec:"骁龙888、2K、5000mAh、67W",reason:"大电池，散热更强"},
-{brand:"小米",name:"小米11 Ultra",price:600,spec:"骁龙888、2K、5000mAh、67W、三主摄",reason:"当年安卓影像机皇"},
-{brand:"小米",name:"小米12",price:500,spec:"骁龙8 Gen1、小屏、4500mAh、67W",reason:"手感轻薄，小屏旗舰"},
-{brand:"小米",name:"小米12 Pro",price:500,spec:"骁龙8 Gen1、2K、4600mAh、120W",reason:"大屏快充旗舰"},
-{brand:"小米",name:"小米12X",price:490,spec:"骁龙870、小屏、4500mAh、67W",reason:"发热低，体验稳定"},
-{brand:"小米",name:"小米12Pro天玑版",price:550,spec:"天玑9000+、5500mAh",reason:"温控好，性价比高"},
-{brand:"小米",name:"小米12S",price:580,spec:"骁龙8+ Gen1、小屏、4500mAh、67W",reason:"手感好，徕卡"},
-{brand:"小米",name:"小米12S Pro",price:630,spec:"骁龙8+ Gen1、2K、4600mAh、120W、徕卡",reason:"徕卡影像"},
-{brand:"小米",name:"小米12S Ultra",price:900,spec:"骁龙8+ Gen1、2K、4860mAh、67W、徕卡一英寸",reason:"真·徕卡旗舰"},
-{brand:"小米",name:"小米13",price:880,spec:"骁龙8 Gen2、小屏直屏、4500mAh、67W、徕卡",reason:"手感一流"},
-{brand:"小米",name:"小米13 Pro",price:930,spec:"骁龙8 Gen2、2K曲面、4820mAh、120W、徕卡",reason:"影像+性能双旗舰"},
-{brand:"小米",name:"小米13 Ultra",price:1350,spec:"骁龙8 Gen2、2K、5000mAh、90W、徕卡四摄",reason:"专业影像旗舰"},
-{brand:"小米",name:"小米14",price:1260,spec:"骁龙8 Gen3、小屏旗舰、IP68、徕卡",reason:"小屏，性能全能"},
-{brand:"小米",name:"小米14 Pro",price:1300,spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡",reason:"全能旗舰"},
-{brand:"小米",name:"小米14 Ultra",price:2200,spec:"骁龙8 Gen3、2K、5300mAh、90W、专业徕卡",reason:"徕卡影像旗舰"},
-{brand:"小米",name:"小米15",price:2000,spec:"骁龙8至尊版、6.36英寸1.5K直屏、5400mAh+90W有线/50W无线",reason:"小屏旗舰，手感均衡"},
-{brand:"小米",name:"小米15 Pro",price:2400,spec:"骁龙8至尊版、6.73英寸2K微曲屏、6100mAh+90W有线/50W无线",reason:"续航影像，全能旗舰"},
-{brand:"小米",name:"小米15 Ultra",price:3200,spec:"骁龙8至尊版、6.73英寸2K微曲屏、6000mAh+90W有线/80W无线、徕卡四摄（含2亿像素长焦）",reason:"徕卡加持，影像巅峰"},
-{brand:"小米",name:"小米17",price:3150,spec:"第五代骁龙8至尊版、1.5K直屏、7000mAh+100W快充",reason:"小屏旗舰"},
-{brand:"小米",name:"小米17 Pro",price:3900,spec:"第五代骁龙8至尊版、1.5K直屏、6300mAh+100W快充、妙享背屏",reason:"妙享背屏，续航优秀"},
-{brand:"小米",name:"小米17 Pro Max",price:4700,spec:"第五代骁龙8至尊版、2K直屏、7500mAh+100W快充、妙享背屏",reason:"妙享背屏，续航够用，性能强劲"},
-{brand:"小米",name:"小米17Ultra",price:5500,spec:"第五代骁龙8至尊版、1.5K直屏、5500mAh",reason:"徕卡联名，顶级旗舰"},
-
-{brand:"红米",name:"Redmi K30 Ultra",price:360,spec:"天玑1000+、120Hz LCD、4500mAh",reason:"千元神机，LCD屏"},
-{brand:"红米",name:"Redmi K30S 至尊版",price:430,spec:"骁龙865、144Hz LCD、5000mAh",reason:"LCD护眼"},
-{brand:"红米",name:"Redmi K40",price:470,spec:"骁龙870、120Hz E4、4520mAh",reason:"性价比神U，屏幕优秀"},
-{brand:"红米",name:"Redmi K40S",price:480,spec:"骁龙870、VC散热、67W快充",reason:"散热升级，更稳"},
-{brand:"红米",name:"Redmi K50",price:480,spec:"天玑8100、2K 120Hz、5500mAh",reason:"续航强，2K直屏"},
-{brand:"红米",name:"Redmi K50 Pro",price:550,spec:"天玑9000、5000mAh、120W",reason:"百瓦快充，性能旗舰"},
-{brand:"红米",name:"红米K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
-{brand:"红米",name:"Redmi K60",price:580,spec:"骁龙8+降频版、2K高光屏、5500mAh",reason:"2K屏+长续航"},
-{brand:"红米",name:"Redmi K60 Pro",price:720,spec:"骁龙8 Gen2、2K、120W快充",reason:"性能小钢炮"},
-{brand:"红米",name:"Redmi K60 至尊版",price:650,spec:"天玑9200+、狂暴性能、1.5K",reason:"性价比游戏旗舰"},
-{brand:"红米",name:"Redmi K70",price:850,spec:"骁龙8 Gen2、2K高光屏、5000mAh、120W",reason:"质感、屏幕、续航全拉满"},
-{brand:"红米",name:"Redmi K70E",price:790,spec:"天玑8300、1.5K、5500mAh、90W",reason:"性价比神机"},
-{brand:"红米",name:"Redmi K70 Pro",price:1080,spec:"骁龙8 Gen3、2K、120W、",reason:"旗舰下放"},
-{brand:"红米",name:"Redmi K70 至尊版",price:1400,spec:"天玑9300+、电竞级散热、1.5K",reason:"强性能"},
-
-{brand:"红米",name:"Redmi Turbo 3",price:750,spec:"骁龙8s Gen3、1.5K、5000mAh",reason:"性能小钢炮"},
-{brand:"红米",name:"Redmi Turbo 4",price:900,spec:"天机8400Ultra、1.5K",reason:"性价比神机"},
-{brand:"红米",name:"Redmi Turbo 4Pro",price:1200,spec:"骁龙8s Gen4、1.5K直屏、7550mAh",reason:"续航很强，性价比高"},
-
-{brand:"OPPO",name:"Find X6",price:950,spec:"天玑9200、120Hz、4800mAh、80W",reason:"超光感潜望长焦"},
-{brand:"OPPO",name:"Find X6 Pro",price:1300,spec:"骁龙8 Gen2、120Hz LTPO、5000mAh、100W",reason:"全焦段夜景影像旗舰"},
-{brand:"OPPO",name:"Find X7",price:1250,spec:"天玑9300、120Hz、5000mAh、100W",reason:"大师影像 高亮度直屏"},
-{brand:"OPPO",name:"Find X7 Ultra",price:2300,spec:"骁龙8 Gen3、120Hz LTPO、5000mAh、100W",reason:"全焦段四摄影像旗舰"},
-{brand:"OPPO",name:"Find X8",price:1600,spec:"天玑9400、120Hz、5630mAh、80W",reason:"轻薄，哈苏影像"},
-{brand:"OPPO",name:"Find X8 Pro",price:2400,spec:"天玑9400、120Hz LTPO、5910mAh、80W",reason:"全焦段长焦 旗舰体验"},
-{brand:"OPPO",name:"Find X8 Ultra",price:3100,spec:"骁龙8至尊版、120Hz LTPO、6100mAh、100W",reason:"哈苏，顶级影像"}，
-{brand:"OPPO",name:"Find X9",price:2300,spec:"天玑9500、120Hz、7025mAh、80W",reason:"哈苏"},
-{brand:"OPPO",name:"Find X9 Pro",price:3100,spec:"天玑9500、120Hz LTPO、7500mAh、80W",reason:"顶级影像"}，
-
-{brand:"OPPO",name:"Reno8 Pro+",price:550,spec:"天玑8100-MAX、120Hz、4500mAh、80W",reason:"颜值在线"},
-{brand:"OPPO",name:"Reno9 Pro",price:570,spec:"天玑8100-MAX、120Hz、4500mAh、67W",reason:"流畅颜值备用机"},
-{brand:"OPPO",name:"Reno9 Pro+",price:590,spec:"骁龙8+ Gen1、120Hz、4700mAh、80W",reason:"轻薄曲面"},
-{brand:"OPPO",name:"Reno10 Pro",price:700,spec:"天玑8200、120Hz、4600mAh、80W",reason:"长焦，人像"},
-{brand:"OPPO",name:"Reno10 Pro+",price:950,spec:"骁龙8+ Gen1、120Hz、4700mAh、100W",reason:"潜望长焦"},
-
-{brand:"苹果",name:"iPhone 12 Pro",price:1200,spec:"A14、6.1英寸OLED、三摄、iOS",reason:"经典三摄，耐用性强"},
-{brand:"苹果",name:"iPhone 12 Pro Max",price:1000,spec:"A14、6.7英寸OLED、大底主摄、iOS",reason:"大屏影像旗舰，续航出色"},
-{brand:"苹果",name:"iPhone 13 Pro",price:1300,spec:"A15、ProMotion高刷、三摄、iOS",reason:"高刷体验，性能提升明显"},
-{brand:"苹果",name:"iPhone 13 Pro Max",price:1350,spec:"A15、6.7英寸高刷、大电池、iOS",reason:"续航天花板，影像升级"},
-{brand:"苹果",name:"iPhone 14 Pro",price:2100,spec:"A16、灵动岛、4800万主摄、iOS",reason:"灵动岛交互，影像大升级"},
-{brand:"苹果",name:"iPhone 14 Pro Max",price:2980,spec:"A16、6.7英寸灵动岛、长续航、iOS",reason:"大屏旗舰，综合体验均衡"},
-{brand:"苹果",name:"iPhone 15 Pro",price:3700,spec:"A17 Pro、钛金属机身、USB-C、iOS",reason:"钛金属更轻，性能强"},
-{brand:"苹果",name:"iPhone 15 Pro Max",price:4400,spec:"A17 Pro、5倍光学变焦、USB-C、iOS",reason:"影像，手感好"},
-{brand:"苹果",name:"iPhone 16 Pro",price:5100,spec:"A18 Pro、AI功能、相机控制按钮、iOS",reason:"体验升级，操控更便捷"},
-{brand:"苹果",name:"iPhone 16 Pro Max",price:6010,spec:"A18 Pro、大屏幕、长续航、iOS",reason:"大屏旗舰，影像好"},
-{brand:"苹果",name:"iPhone 17 Pro",price:5100,spec:"A19 Pro",reason:"旗舰，能力全面"},
-{brand:"苹果",name:"iPhone 17 Pro Max",price:6000,spec:"A19 Pro、极致影像、超长续航、iOS",reason:"综合无短板"}];
+    {brand:"小米",name:"小米10",price:380,spec:"骁龙865、90Hz AMOLED、4780mAh、30W",reason:"经典旗舰，性价比极高"},
+    {brand:"小米",name:"小米10 Pro",price:370,spec:"骁龙865、120Hz、4500mAh、50W",reason:"当年旗舰"},
+    {brand:"小米",name:"小米10s",price:400,spec:"骁龙870、4780mAh",reason:"音质无敌，性价比高"},
+    {brand:"小米",name:"小米10 Ultra",price:480,spec:"骁龙865、120Hz、4500mAh、120W",reason:"小米初代影像机皇"},
+    {brand:"小米",name:"小米11",price:370,spec:"骁龙888、2K 120Hz、4600mAh、55W",reason:"2K屏旗舰，手感轻薄"},
+    {brand:"小米",name:"小米11 Pro",price:400,spec:"骁龙888、2K、5000mAh、67W",reason:"大电池，散热更强"},
+    {brand:"小米",name:"小米11 Ultra",price:600,spec:"骁龙888、2K、5000mAh、67W、三主摄",reason:"当年安卓影像机皇"},
+    {brand:"小米",name:"小米12",price:500,spec:"骁龙8 Gen1、小屏、4500mAh、67W",reason:"手感轻薄，小屏旗舰"},
+    {brand:"小米",name:"小米12 Pro",price:500,spec:"骁龙8 Gen1、2K、4600mAh、120W",reason:"大屏快充旗舰"},
+    {brand:"小米",name:"小米12X",price:490,spec:"骁龙870、小屏、4500mAh、67W",reason:"发热低，体验稳定"},
+    {brand:"小米",name:"小米12Pro天玑版",price:550,spec:"天玑9000+、5500mAh",reason:"温控好，性价比高"},
+    {brand:"小米",name:"小米12S",price:580,spec:"骁龙8+ Gen1、小屏、4500mAh、67W",reason:"手感好，徕卡"},
+    {brand:"小米",name:"小米12S Pro",price:630,spec:"骁龙8+ Gen1、2K、4600mAh、120W、徕卡",reason:"徕卡影像"},
+    {brand:"小米",name:"小米12S Ultra",price:900,spec:"骁龙8+ Gen1、2K、4860mAh、67W、徕卡一英寸",reason:"真·徕卡旗舰"},
+    {brand:"小米",name:"小米13",price:880,spec:"骁龙8 Gen2、小屏直屏、4500mAh、67W、徕卡",reason:"手感一流"},
+    {brand:"小米",name:"小米13 Pro",price:930,spec:"骁龙8 Gen2、2K曲面、4820mAh、120W、徕卡",reason:"影像+性能双旗舰"},
+    {brand:"小米",name:"小米13 Ultra",price:1350,spec:"骁龙8 Gen2、2K、5000mAh、90W、徕卡四摄",reason:"专业影像旗舰"},
+    {brand:"小米",name:"小米14",price:1260,spec:"骁龙8 Gen3、小屏旗舰、IP68、徕卡",reason:"小屏，性能全能"},
+    {brand:"小米",name:"小米14 Pro",price:1300,spec:"骁龙8 Gen3、2K、4880mAh、120W、徕卡",reason:"全能旗舰"},
+    {brand:"小米",name:"小米14 Ultra",price:2200,spec:"骁龙8 Gen3、2K、5300mAh、90W、专业徕卡",reason:"徕卡影像旗舰"},
+    {brand:"小米",name:"小米15",price:2000,spec:"骁龙8至尊版、6.36英寸1.5K直屏、5400mAh+90W有线/50W无线",reason:"小屏旗舰，手感均衡"},
+    {brand:"小米",name:"小米15 Pro",price:2400,spec:"骁龙8至尊版、6.73英寸2K微曲屏、6100mAh+90W有线/50W无线",reason:"续航影像，全能旗舰"},
+    {brand:"小米",name:"小米15 Ultra",price:3200,spec:"骁龙8至尊版、6.73英寸2K微曲屏、6000mAh+90W有线/80W无线、徕卡四摄（含2亿像素长焦）",reason:"徕卡加持，影像巅峰"},
+    {brand:"小米",name:"小米17",price:3150,spec:"第五代骁龙8至尊版、1.5K直屏、7000mAh+100W快充",reason:"小屏旗舰"},
+    {brand:"小米",name:"小米17 Pro",price:3900,spec:"第五代骁龙8至尊版、1.5K直屏、6300mAh+100W快充、妙享背屏",reason:"妙享背屏，续航优秀"},
+    {brand:"小米",name:"小米17 Pro Max",price:4700,spec:"第五代骁龙8至尊版、2K直屏、7500mAh+100W快充、妙享背屏",reason:"妙享背屏，续航够用，性能强劲"},
+    {brand:"小米",name:"小米17Ultra",price:5500,spec:"第五代骁龙8至尊版、1.5K直屏、5500mAh",reason:"徕卡联名，顶级旗舰"},
+    {brand:"红米",name:"Redmi K30 Ultra",price:360,spec:"天玑1000+、120Hz LCD、4500mAh",reason:"千元神机，LCD屏"},
+    {brand:"红米",name:"Redmi K30S 至尊版",price:430,spec:"骁龙865、144Hz LCD、5000mAh",reason:"LCD护眼"},
+    {brand:"红米",name:"Redmi K40",price:470,spec:"骁龙870、120Hz E4、4520mAh",reason:"性价比神U，屏幕优秀"},
+    {brand:"红米",name:"Redmi K40S",price:480,spec:"骁龙870、VC散热、67W快充",reason:"散热升级，更稳"},
+    {brand:"红米",name:"Redmi K50",price:480,spec:"天玑8100、2K 120Hz、5500mAh",reason:"续航强，2K直屏"},
+    {brand:"红米",name:"Redmi K50 Pro",price:550,spec:"天玑9000、5000mAh、120W",reason:"百瓦快充，性能旗舰"},
+    {brand:"红米",name:"红米K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
+    {brand:"红米",name:"Redmi K60",price:580,spec:"骁龙8+降频版、2K高光屏、5500mAh",reason:"2K屏+长续航"},
+    {brand:"红米",name:"Redmi K60 Pro",price:720,spec:"骁龙8 Gen2、2K、120W快充",reason:"性能小钢炮"},
+    {brand:"红米",name:"Redmi K60 至尊版",price:650,spec:"天玑9200+、狂暴性能、1.5K",reason:"性价比游戏旗舰"},
+    {brand:"红米",name:"Redmi K70",price:850,spec:"骁龙8 Gen2、2K高光屏、5000mAh、120W",reason:"质感、屏幕、续航全拉满"},
+    {brand:"红米",name:"Redmi K70E",price:790,spec:"天玑8300、1.5K、5500mAh、90W",reason:"性价比神机"},
+    {brand:"红米",name:"Redmi K70 Pro",price:1080,spec:"骁龙8 Gen3、2K、120W",reason:"旗舰下放"},
+    {brand:"红米",name:"Redmi K70 至尊版",price:1400,spec:"天玑9300+、电竞级散热、1.5K",reason:"强性能"},
+    {brand:"红米",name:"Redmi Turbo 3",price:750,spec:"骁龙8s Gen3、1.5K、5000mAh",reason:"性能小钢炮"},
+    {brand:"红米",name:"Redmi Turbo 4",price:900,spec:"天机8400Ultra、1.5K",reason:"性价比神机"},
+    {brand:"红米",name:"Redmi Turbo 4Pro",price:1200,spec:"骁龙8s Gen4、1.5K直屏、7550mAh",reason:"续航很强，性价比高"},
+    {brand:"OPPO",name:"Find X6",price:950,spec:"天玑9200、120Hz、4800mAh、80W",reason:"超光感潜望长焦"},
+    {brand:"OPPO",name:"Find X6 Pro",price:1300,spec:"骁龙8 Gen2、120Hz LTPO、5000mAh、100W",reason:"全焦段夜景影像旗舰"},
+    {brand:"OPPO",name:"Find X7",price:1250,spec:"天玑9300、120Hz、5000mAh、100W",reason:"大师影像 高亮度直屏"},
+    {brand:"OPPO",name:"Find X7 Ultra",price:2300,spec:"骁龙8 Gen3、120Hz LTPO、5000mAh、100W",reason:"全焦段四摄影像旗舰"},
+    {brand:"OPPO",name:"Find X8",price:1600,spec:"天玑9400、120Hz、5630mAh、80W",reason:"轻薄，哈苏影像"},
+    {brand:"OPPO",name:"Find X8 Pro",price:2400,spec:"天玑9400、120Hz LTPO、5910mAh、80W",reason:"全焦段长焦 旗舰体验"},
+    {brand:"OPPO",name:"Find X8 Ultra",price:3100,spec:"骁龙8至尊版、120Hz LTPO、6100mAh、100W",reason:"哈苏，顶级影像"},
+    {brand:"OPPO",name:"Find X9",price:2300,spec:"天玑9500、120Hz、7025mAh、80W",reason:"哈苏"},
+    {brand:"OPPO",name:"Find X9 Pro",price:3100,spec:"天玑9500、120Hz LTPO、7500mAh、80W",reason:"顶级影像"},
+    {brand:"OPPO",name:"Reno8 Pro+",price:550,spec:"天玑8100-MAX、120Hz、4500mAh、80W",reason:"颜值在线"},
+    {brand:"OPPO",name:"Reno9 Pro",price:570,spec:"天玑8100-MAX、120Hz、4500mAh、67W",reason:"流畅颜值备用机"},
+    {brand:"OPPO",name:"Reno9 Pro+",price:590,spec:"骁龙8+ Gen1、120Hz、4700mAh、80W",reason:"轻薄曲面"},
+    {brand:"OPPO",name:"Reno10 Pro",price:700,spec:"天玑8200、120Hz、4600mAh、80W",reason:"长焦，人像"},
+    {brand:"OPPO",name:"Reno10 Pro+",price:950,spec:"骁龙8+ Gen1、120Hz、4700mAh、100W",reason:"潜望长焦"},
+    {brand:"vivo",name:"vivo X80",price:680,spec:"天玑9000、120Hz、4500mAh、80W",reason:"影像出色，性价比高"},
+    {brand:"vivo",name:"vivo X90 Pro",price:1100,spec:"天玑9200、120Hz、4870mAh、120W",reason:"蔡司影像，人像优秀"},
+    {brand:"vivo",name:"vivo X100 Pro",price:1500,spec:"天玑9300、120Hz、5400mAh、100W",reason:"长焦微距，影像旗舰"},
+    {brand:"vivo",name:"vivo X80 Pro",price:850,spec:"骁龙8 Gen1、2K LTPO、4700mAh、80W",reason:"蔡司影像旗舰"},
+    {brand:"vivo",name:"vivo X90",price:950,spec:"天玑9200、120Hz、4810mAh、120W",reason:"性能均衡，影像不错"},
+    {brand:"vivo",name:"vivo X100",price:1250,spec:"天玑9300、120Hz、5000mAh、120W",reason:"性能强劲，续航优秀"},
+    {brand:"苹果",name:"iPhone 12 Pro",price:1200,spec:"A14、6.1英寸OLED、三摄、iOS",reason:"经典三摄，耐用性强"},
+    {brand:"苹果",name:"iPhone 12 Pro Max",price:1000,spec:"A14、6.7英寸OLED、大底主摄、iOS",reason:"大屏影像旗舰，续航出色"},
+    {brand:"苹果",name:"iPhone 13 Pro",price:1300,spec:"A15、ProMotion高刷、三摄、iOS",reason:"高刷体验，性能提升明显"},
+    {brand:"苹果",name:"iPhone 13 Pro Max",price:1350,spec:"A15、6.7英寸高刷、大电池、iOS",reason:"续航天花板，影像升级"},
+    {brand:"苹果",name:"iPhone 14 Pro",price:2100,spec:"A16、灵动岛、4800万主摄、iOS",reason:"灵动岛交互，影像大升级"},
+    {brand:"苹果",name:"iPhone 14 Pro Max",price:2980,spec:"A16、6.7英寸灵动岛、长续航、iOS",reason:"大屏旗舰，综合体验均衡"},
+    {brand:"苹果",name:"iPhone 15 Pro",price:3700,spec:"A17 Pro、钛金属机身、USB-C、iOS",reason:"钛金属更轻，性能强"},
+    {brand:"苹果",name:"iPhone 15 Pro Max",price:4400,spec:"A17 Pro、5倍光学变焦、USB-C、iOS",reason:"影像，手感好"},
+    {brand:"苹果",name:"iPhone 16 Pro",price:5100,spec:"A18 Pro、AI功能、相机控制按钮、iOS",reason:"体验升级，操控更便捷"},
+    {brand:"苹果",name:"iPhone 16 Pro Max",price:6010,spec:"A18 Pro、大屏幕、长续航、iOS",reason:"大屏旗舰，影像好"},
+    {brand:"苹果",name:"iPhone 17 Pro",price:5100,spec:"A19 Pro",reason:"旗舰，能力全面"},
+    {brand:"苹果",name:"iPhone 17 Pro Max",price:6000,spec:"A19 Pro、极致影像、超长续航、iOS",reason:"综合无短板"},
+    {brand:"一加",name:"一加9 Pro",price:550,spec:"骁龙888、2K 120Hz LTPO、4500mAh、65W",reason:"哈苏影像，屏幕出色"},
+    {brand:"一加",name:"一加10 Pro",price:620,spec:"骁龙8 Gen1、2K LTPO、5000mAh、80W",reason:"游戏体验优化"},
+    {brand:"一加",name:"一加11",price:750,spec:"骁龙8 Gen2、2K 120Hz、5000mAh、100W",reason:"性能旗舰，性价比高"},
+    {brand:"一加",name:"一加12",price:950,spec:"骁龙8 Gen3、2K东方屏、5400mAh、100W",reason:"全能旗舰，影像升级"},
+    {brand:"魅族",name:"魅族18 Pro",price:580,spec:"骁龙888、2K 120Hz、4500mAh、40W",reason:"轻薄旗舰，Flyme系统"},
+    {brand:"魅族",name:"魅族20",price:720,spec:"骁龙8 Gen2、144Hz、4700mAh、67W",reason:"直屏旗舰，设计简约"},
+    {brand:"华为",name:"华为P40 Pro",price:650,spec:"麒麟990、90Hz OLED、4200mAh、40W",reason:"经典影像旗舰"},
+    {brand:"华为",name:"华为Mate 40 Pro",price:850,spec:"麒麟9000、90Hz、4400mAh、66W",reason:"麒麟绝唱，均衡旗舰"}
+];
 
 let currentList = [];
+let currentSort = 'default';
+
+// 获取随机手机函数
+function getRandomPhones(count) {
+    const shuffled = [...phones].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
+
+// 初始化页面
+document.addEventListener('DOMContentLoaded', function() {
+    // 设置排序按钮激活状态
+    updateSortButtons();
+    
+    // 添加键盘事件支持
+    document.getElementById('keyword').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            filterPhone();
+        }
+    });
+    
+    // 显示随机10部手机（初始状态）
+    currentList = getRandomPhones(10);
+    updateResultCount();
+    renderPhoneList();
+});
 
 function filterPhone() {
-  const key = (document.getElementById("keyword").value || "").toLowerCase();
-  const brand = document.getElementById("brand").value;
-  const sortBy = document.getElementById("sortBy").value;
-  let min = parseInt(document.getElementById("minPrice").value) || 0;
-  let max = parseInt(document.getElementById("maxPrice").value) || 99999;
+    const keyword = document.getElementById('keyword').value.toLowerCase();
+    const brand = document.getElementById('brand').value;
+    const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
+    const maxPrice = parseInt(document.getElementById('maxPrice').value) || 99999;
+    
+    // 显示加载状态
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <p>正在筛选手机...</p>
+        </div>
+    `;
+    
+    setTimeout(() => {
+        // 筛选逻辑
+        currentList = phones.filter(phone => {
+            const searchKeyword = keyword.toLowerCase();
+            const phoneName = phone.name.toLowerCase();
+            const phoneBrand = phone.brand.toLowerCase();
+            const phoneSpec = phone.spec.toLowerCase();
+            const phoneReason = phone.reason.toLowerCase();
+            
+            const matchesKeyword = !searchKeyword || 
+                phoneName.includes(searchKeyword) || 
+                phoneBrand.includes(searchKeyword) ||
+                phoneSpec.includes(searchKeyword) ||
+                phoneReason.includes(searchKeyword);
+            
+            const matchesBrand = brand === '全部' || phone.brand === brand;
+            const matchesPrice = phone.price >= minPrice && phone.price <= maxPrice;
+            
+            return matchesKeyword && matchesBrand && matchesPrice;
+        });
+        
+        // 应用当前排序
+        applySorting();
+        
+        // 更新结果
+        updateResultCount();
+        renderPhoneList();
+    }, 300);
+}
 
-  let list = phones.filter(p =>
-    (brand === "全部" || p.brand === brand) &&
-    (p.price >= min && p.price <= max) &&
-    (p.name.toLowerCase().includes(key) || p.spec.toLowerCase().includes(key))
-  );
+function applySorting() {
+    if (currentSort === 'asc') {
+        currentList.sort((a, b) => a.price - b.price);
+    } else if (currentSort === 'desc') {
+        currentList.sort((a, b) => b.price - a.price);
+    }
+}
 
-  if (sortBy === "asc") {
-    list.sort((a, b) => a.price - b.price);
-  } else if (sortBy === "desc") {
-    list.sort((a, b) => b.price - a.price);
-  }
+function sortPhones(sortType) {
+    currentSort = sortType;
+    applySorting();
+    updateSortButtons();
+    renderPhoneList();
+}
 
-  currentList = list;
-  const res = document.getElementById("result");
+function updateSortButtons() {
+    // 移除所有激活状态
+    document.getElementById('sortDefault').classList.remove('active');
+    document.getElementById('sortAsc').classList.remove('active');
+    document.getElementById('sortDesc').classList.remove('active');
+    
+    // 添加当前激活状态
+    if (currentSort === 'default') {
+        document.getElementById('sortDefault').classList.add('active');
+    } else if (currentSort === 'asc') {
+        document.getElementById('sortAsc').classList.add('active');
+    } else {
+        document.getElementById('sortDesc').classList.add('active');
+    }
+}
 
-  if (currentList.length === 0) {
-    res.innerHTML = "<p>暂无匹配机型</p>";
-    return;
-  }
+function resetFilters() {
+    document.getElementById('keyword').value = '';
+    document.getElementById('brand').value = '全部';
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    
+    currentList = getRandomPhones(10);
+    currentSort = 'default';
+    updateSortButtons();
+    updateResultCount();
+    renderPhoneList();
+}
 
-  res.innerHTML = `
-  <div class="phone-list">
-    ${currentList.map((p, i) => `
-      <div class="phone-item" onclick="showDetail(${i})">
-        <div class="phone-name">${p.name}</div>
-        <div class="phone-spec">${p.price}元 | ${p.spec.slice(0, 24)}...</div>
-      </div>
-    `).join('')}
-  </div>`;
+function updateResultCount() {
+    const count = currentList.length;
+    document.getElementById('resultCount').textContent = `共找到 ${count} 款手机`;
+}
+
+function renderPhoneList() {
+    const resultDiv = document.getElementById('result');
+    
+    if (currentList.length === 0) {
+        resultDiv.innerHTML = `
+            <div class="no-result">
+                <div class="no-result-icon">😕</div>
+                <p>没有找到符合条件的机型</p>
+                <p style="font-size: 12px; margin-top: 8px; color: #888;">请尝试调整筛选条件</p>
+            </div>
+        `;
+        return;
+    }
+    
+    resultDiv.innerHTML = `
+        <div class="phone-list">
+            ${currentList.map((phone, index) => `
+                <div class="phone-item" onclick="showDetail(${index})">
+                    <div class="brand-tag brand-${getBrandClass(phone.brand)}">${phone.brand}</div>
+                    <div class="phone-name">${phone.name}</div>
+                    <div class="phone-price">${phone.price}</div>
+                    <div class="phone-spec">${phone.spec}</div>
+                    <div class="phone-reason">${phone.reason}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function getBrandClass(brand) {
+    const brandMap = {
+        '小米': 'xiaomi',
+        '红米': 'redmi',
+        '苹果': 'apple',
+        'OPPO': 'oppo',
+        '一加': 'oneplus',
+        'vivo': 'vivo',
+        '魅族': 'meizu',
+        '华为': 'huawei'
+    };
+    return brandMap[brand] || 'default';
 }
 
 function showDetail(index) {
-  const p = currentList[index];
-  document.getElementById("detailContent").innerHTML = `
-    <h3>${p.name}</h3>
-    <p>价格：${p.price}元（参考）</p>
-    <p>配置：${p.spec}</p>
-    <p>推荐理由：${p.reason}</p>
-  `;
-  document.getElementById("modal").style.display = "flex";
+    const phone = currentList[index];
+    const modal = document.getElementById('modal');
+    
+    document.getElementById('modalTitle').textContent = phone.name;
+    document.getElementById('modalBrand').textContent = phone.brand;
+    document.getElementById('modalBrand').className = `brand-tag brand-${getBrandClass(phone.brand)}`;
+    document.getElementById('modalPrice').textContent = phone.price + '元';
+    document.getElementById('modalSpec').textContent = phone.spec;
+    document.getElementById('modalReason').textContent = '推荐理由：' + phone.reason;
+    
+    modal.style.display = 'flex';
 }
 
 function closeModal() {
-  document.getElementById("modal").style.display = "none";
+    document.getElementById('modal').style.display = 'none';
+}
+
+// 点击模态框外部关闭
+window.onclick = function(event) {
+    const modal = document.getElementById('modal');
+    if (event.target === modal) {
+        closeModal();
+    }
 }
 </script>
 </body>
