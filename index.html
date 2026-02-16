@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大湿数码推荐</title>
+<title>大湿数码推荐</title> 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft YaHei",sans-serif;font-weight:bold}
 body{background:#f5f5f5;padding:20px}
@@ -34,7 +34,7 @@ button:hover{background:#3367d6}
 <body>
 
 <div class="container">
-  <h1>大湿数码推荐</h1>
+  <h1>大湿数码推荐</h1> 
   <div class="filter">
     <input type="text" id="keyword" placeholder="搜索：骁龙8 Gen2、直屏、LCD、游戏、续航、徕卡、哈苏">
     <select id="brand">
@@ -109,7 +109,7 @@ const phones = [
 {brand:"红米",name:"Redmi K40S",price:480,spec:"骁龙870、VC散热、67W快充",reason:"散热升级，更稳"}, 
 {brand:"红米",name:"Redmi K50",price:480,spec:"天玑8100、2K 120Hz、5500mAh",reason:"续航强，2K直屏"}, 
 {brand:"红米",name:"Redmi K50 Pro",price:550,spec:"天玑9000、5000mAh、120W",reason:"百瓦快充，性能旗舰"}, 
-{brand:"小米",name:"红米K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
+{brand:"红米",name:"红米K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
 {brand:"红米",name:"Redmi K60",price:580,spec:"骁龙8+降频版、2K高光屏、5500mAh",reason:"2K屏+长续航"}, 
 {brand:"红米",name:"Redmi K60 Pro",price:720,spec:"骁龙8 Gen2、2K、120W快充",reason:"性能小钢炮"}, 
 {brand:"红米",name:"Redmi K60 至尊版",price:650,spec:"天玑9200+、狂暴性能、1.5K",reason:"性价比游戏旗舰"}, 
@@ -174,7 +174,7 @@ function showDetail(index) {
   const p = currentList[index];
   document.getElementById("detailContent").innerHTML = `
     <h3>${p.name}</h3>
-    <p>价格：${p.price}元（闲鱼参考）</p>
+    <p>价格：${p.price}元（参考）</p> 
     <p>配置：${p.spec}</p>
     <p>推荐理由：${p.reason}</p>
   `;
