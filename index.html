@@ -549,7 +549,7 @@ const phones = [
     {brand:"红米",name:"Redmi K40S",price:480,spec:"骁龙870、VC散热、67W快充",reason:"散热升级，更稳"},
     {brand:"红米",name:"Redmi K50",price:480,spec:"天玑8100、2K 120Hz、5500mAh",reason:"续航强，2K直屏"},
     {brand:"红米",name:"Redmi K50 Pro",price:550,spec:"天玑9000、5000mAh、120W",reason:"百瓦快充，性能旗舰"},
-    {brand:"红米",name:"红米K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
+    {brand:"红米",name:"Redmi K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
     {brand:"红米",name:"Redmi K60",price:580,spec:"骁龙8+降频版、2K高光屏、5500mAh",reason:"2K屏+长续航"},
     {brand:"红米",name:"Redmi K60 Pro",price:720,spec:"骁龙8 Gen2、2K、120W快充",reason:"性能小钢炮"},
     {brand:"红米",name:"Redmi K60 至尊版",price:650,spec:"天玑9200+、狂暴性能、1.5K",reason:"性价比游戏旗舰"},
@@ -623,8 +623,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // 显示随机10部手机（初始状态）
-    currentList = getRandomPhones(10);
+    // 显示随机5部手机（初始状态）
+    currentList = getRandomPhones(5);
     updateResultCount();
     renderPhoneList();
 });
@@ -711,7 +711,8 @@ function resetFilters() {
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
     
-    currentList = getRandomPhones(10);
+    // 重置后也随机5部
+    currentList = getRandomPhones(5);
     currentSort = 'default';
     updateSortButtons();
     updateResultCount();
