@@ -27,6 +27,12 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
     padding: 20px;
     min-height: 100vh;
+    opacity: 0;
+    animation: pageFadeIn 0.6s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    to { opacity: 1; }
 }
 
 .container {
@@ -59,6 +65,17 @@ h1 {
     font-weight: 400;
 }
 
+.tip-bar {
+    background: rgba(74,108,247,0.06);
+    border-left: 3px solid var(--primary);
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+}
+
 .filter {
     display: flex;
     flex-direction: column;
@@ -69,12 +86,6 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 6px;
-}
-
-.filter-label {
-    font-size: 13px;
-    color: var(--dark);
-    font-weight: 600;
 }
 
 input, select, button {
@@ -107,16 +118,29 @@ input:focus, select:focus {
 
 .price-input {
     flex: 1;
-    position: relative;
-}
-
-.price-input input {
-    width: 100%;
 }
 
 .price-separator {
     color: var(--secondary);
     font-weight: 600;
+}
+
+.history-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+.history-item {
+    background: #f1f3f6;
+    color: #555;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.history-item:hover {
+    background: #dfe1e6;
 }
 
 .filter-actions {
@@ -132,21 +156,11 @@ input:focus, select:focus {
     border: none;
     font-weight: 600;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
     transition: all 0.2s ease;
 }
-
 .filter-btn:hover {
     background: var(--primary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(74, 108, 247, 0.2);
-}
-
-.filter-btn:active {
-    transform: translateY(0);
 }
 
 .reset-btn {
@@ -154,9 +168,10 @@ input:focus, select:focus {
     color: var(--dark);
     border: 1px solid var(--border);
 }
-
-.reset-btn:hover {
-    background: #e9ecef;
+.clear-all-btn {
+    background: #fff;
+    color: #e74c3c;
+    border: 1px solid #fad0d0;
 }
 
 .result-header {
@@ -166,33 +181,10 @@ input:focus, select:focus {
     margin-top: 20px;
     margin-bottom: 10px;
 }
-
-.result-count {
-    font-size: 13px;
-    color: var(--secondary);
-    font-weight: 500;
-}
-
-.sort-options {
-    display: flex;
-    gap: 6px;
-}
-
-.sort-btn {
-    padding: 5px 10px;
-    font-size: 12px;
-    background: var(--light);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.sort-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
+.result-count { font-size:13px; color:var(--secondary); }
+.sort-options { display:flex; gap:6px; }
+.sort-btn { padding:5px 10px; font-size:12px; background:var(--light); border:1px solid var(--border); border-radius:5px; cursor:pointer; }
+.sort-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
 
 .phone-list {
     display: flex;
@@ -206,234 +198,76 @@ input:focus, select:focus {
     border-radius: 8px;
     border: 1px solid var(--border);
     cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.25s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: cardSlideIn 0.4s ease forwards;
 }
-
+@keyframes cardSlideIn { to{opacity:1; transform:translateY(0);} }
 .phone-item:hover {
     border-color: var(--primary);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .brand-tag {
     display: inline-block;
     padding: 2px 8px;
-    background: rgba(74, 108, 247, 0.1);
+    background: rgba(74,108,247,0.1);
     color: var(--primary);
     border-radius: 4px;
     font-size: 11px;
     font-weight: 600;
     margin-bottom: 6px;
 }
+.phone-name { font-size:16px; color:var(--dark); font-weight:700; margin-bottom:4px; }
+.phone-price { color:#e74c3c; font-size:18px; font-weight:700; margin-bottom:6px; }
+.phone-price::after { content:'元'; font-size:13px; color:var(--secondary); margin-left:2px; }
+.phone-spec { font-size:13px; color:var(--secondary); line-height:1.4; }
+.phone-reason { font-size:12px; color:#666; margin-top:6px; padding-top:6px; border-top:1px dashed var(--border); }
 
-.phone-name {
-    font-size: 16px;
-    color: var(--dark);
-    margin-bottom: 4px;
-    font-weight: 700;
-}
+.no-result { text-align:center; padding:40px 20px; color:var(--secondary); }
+.recommend-label { font-size:12px; color:var(--primary); text-align:center; margin:10px 0; }
 
-.phone-price {
-    color: #e74c3c;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 6px;
-}
-
-.phone-price::after {
-    content: '元';
-    font-size: 13px;
-    color: var(--secondary);
-    margin-left: 2px;
-}
-
-.phone-spec {
-    font-size: 13px;
-    color: var(--secondary);
-    line-height: 1.4;
-    margin-bottom: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.phone-reason {
-    font-size: 12px;
-    color: #666;
-    font-style: italic;
-    margin-top: 6px;
-    padding-top: 6px;
-    border-top: 1px dashed var(--border);
-}
-
-.no-result {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--secondary);
-}
-
-.no-result-icon {
-    font-size: 36px;
-    margin-bottom: 12px;
-    opacity: 0.5;
-}
-
-.loading {
-    text-align: center;
-    padding: 30px;
-    color: var(--secondary);
-}
-
+.loading { text-align:center; padding:30px; color:var(--secondary); }
 .loading-spinner {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 3px solid var(--light);
+    width: 34px; height:34px;
+    border:3px solid var(--light);
     border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin-bottom: 12px;
+    border-radius:50%;
+    animation: spin 0.7s linear infinite;
 }
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+@keyframes spin { to{transform:rotate(360deg);} }
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 1000;
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.5); display:none; justify-content:center; align-items:center;
+    padding:20px; z-index:1000;
 }
-
 .modal-content {
-    background: #fff;
-    padding: 24px;
-    border-radius: 12px;
-    max-width: 450px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    animation: modalSlideIn 0.2s ease;
-    position: relative;
+    background:#fff; padding:24px; border-radius:12px; max-width:450px; width:100%;
+    animation: modalSlideIn 0.25s ease;
 }
-
 @keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from{opacity:0; transform:translateY(15px);}
+    to{opacity:1; transform:translateY(0);}
 }
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.modal-title { font-size:20px; font-weight:700; color:var(--dark); }
+.close-btn { background:none; border:none; font-size:22px; color:var(--secondary); cursor:pointer; }
+.modal-spec { background:var(--light); padding:14px; border-radius:6px; margin:14px 0; font-size:14px; }
+.modal-price { font-size:24px; color:#e74c3c; font-weight:700; margin:16px 0; }
+.modal-reason { background:rgba(74,108,247,0.05); padding:14px; border-radius:6px; border-left:4px solid var(--primary); margin-top:16px; font-size:13px; }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.modal-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--dark);
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 22px;
-    color: var(--secondary);
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease;
-}
-
-.close-btn:hover {
-    background: var(--light);
-}
-
-.modal-spec {
-    background: var(--light);
-    padding: 14px;
-    border-radius: 6px;
-    margin: 14px 0;
-    line-height: 1.5;
-    font-size: 14px;
-}
-
-.modal-price {
-    font-size: 24px;
-    color: #e74c3c;
-    font-weight: 700;
-    margin: 16px 0;
-}
-
-.modal-reason {
-    background: rgba(74, 108, 247, 0.05);
-    padding: 14px;
-    border-radius: 6px;
-    border-left: 4px solid var(--primary);
-    margin-top: 16px;
-    font-size: 13px;
-}
-
-/* 品牌颜色标签 */
-.brand-xiaomi { background: rgba(255, 103, 0, 0.1); color: #ff6700; }
-.brand-redmi { background: rgba(237, 28, 36, 0.1); color: #ed1c24; }
-.brand-apple { background: rgba(0, 0, 0, 0.1); color: #000; }
-.brand-oppo { background: rgba(0, 150, 238, 0.1); color: #0096ee; }
-.brand-oneplus { background: rgba(237, 28, 36, 0.1); color: #ed1c24; }
-.brand-vivo { background: rgba(0, 114, 187, 0.1); color: #0072bb; }
-.brand-meizu { background: rgba(0, 200, 83, 0.1); color: #00c853; }
-.brand-huawei { background: rgba(237, 28, 36, 0.1); color: #ed1c24; }
-
-/* 响应式设计 */
-@media (max-width: 480px) {
-    .container {
-        padding: 16px;
-    }
-    
-    h1 {
-        font-size: 20px;
-    }
-    
-    .price-row {
-        flex-direction: column;
-        gap: 6px;
-    }
-    
-    .price-separator {
-        display: none;
-    }
-    
-    .filter-actions {
-        flex-direction: column;
-    }
-    
-    .modal-content {
-        padding: 20px 16px;
-    }
-}
+.brand-xiaomi{background:rgba(255,103,0,0.1);color:#ff6700;}
+.brand-redmi{background:rgba(237,28,36,0.1);color:#ed1c24;}
+.brand-apple{background:rgba(0,0,0,0.1);color:#000;}
+.brand-oppo{background:rgba(0,150,238,0.1);color:#0096ee;}
+.brand-oneplus{background:rgba(237,28,36,0.1);color:#ed1c24;}
+.brand-vivo{background:rgba(0,114,187,0.1);color:#0072bb;}
+.brand-meizu{background:rgba(0,200,83,0.1);color:#00c853;}
+.brand-huawei{background:rgba(237,28,36,0.1);color:#ed1c24;}
 </style>
 </head>
 <body>
@@ -443,12 +277,15 @@ input:focus, select:focus {
         <h1>📱 大湿数码推荐</h1>
         <p class="subtitle">二手手机智能筛选平台</p>
     </div>
-    
+
+    <div class="tip-bar" id="tipBar">加载中...</div>
+
     <div class="filter">
         <div class="filter-group">
             <input type="text" id="keyword" placeholder="搜索手机型号或配置...">
+            <div class="history-box" id="historyBox"></div>
         </div>
-        
+
         <div class="filter-group">
             <select id="brand">
                 <option value="全部">所有品牌</option>
@@ -462,7 +299,7 @@ input:focus, select:focus {
                 <option value="华为">华为</option>
             </select>
         </div>
-        
+
         <div class="filter-group">
             <div class="price-row">
                 <div class="price-input">
@@ -474,17 +311,14 @@ input:focus, select:focus {
                 </div>
             </div>
         </div>
-        
+
         <div class="filter-actions">
-            <button class="filter-btn" onclick="filterPhone()">
-                <span>🔍 搜索</span>
-            </button>
-            <button class="filter-btn reset-btn" onclick="resetFilters()">
-                <span>🔄 重置</span>
-            </button>
+            <button class="filter-btn" onclick="filterPhone()">🔍 搜索</button>
+            <button class="filter-btn reset-btn" onclick="resetFilters()">🔄 重置</button>
+            <button class="filter-btn clear-all-btn" onclick="clearAllFilters()">🗑 清空</button>
         </div>
     </div>
-    
+
     <div class="result-header">
         <div class="result-count" id="resultCount"></div>
         <div class="sort-options">
@@ -493,7 +327,7 @@ input:focus, select:focus {
             <button class="sort-btn" onclick="sortPhones('desc')" id="sortDesc">价格降序</button>
         </div>
     </div>
-    
+
     <div id="result"></div>
 </div>
 
@@ -503,13 +337,9 @@ input:focus, select:focus {
             <h2 class="modal-title" id="modalTitle"></h2>
             <button class="close-btn" onclick="closeModal()">×</button>
         </div>
-        
         <div class="brand-tag" id="modalBrand"></div>
-        
         <div class="modal-price" id="modalPrice"></div>
-        
         <div class="modal-spec" id="modalSpec"></div>
-        
         <div class="modal-reason" id="modalReason"></div>
     </div>
 </div>
@@ -549,7 +379,7 @@ const phones = [
     {brand:"红米",name:"Redmi K40S",price:480,spec:"骁龙870、VC散热、67W快充",reason:"散热升级，更稳"},
     {brand:"红米",name:"Redmi K50",price:480,spec:"天玑8100、2K 120Hz、5500mAh",reason:"续航强，2K直屏"},
     {brand:"红米",name:"Redmi K50 Pro",price:550,spec:"天玑9000、5000mAh、120W",reason:"百瓦快充，性能旗舰"},
-    {brand:"红米",name:"Redmi K50至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
+    {brand:"红米",name:"Redmi K50 至尊版",price:620,spec:"骁龙8+、1.5K直屏、5000mAh",reason:"性价比高"},
     {brand:"红米",name:"Redmi K60",price:580,spec:"骁龙8+降频版、2K高光屏、5500mAh",reason:"2K屏+长续航"},
     {brand:"红米",name:"Redmi K60 Pro",price:720,spec:"骁龙8 Gen2、2K、120W快充",reason:"性能小钢炮"},
     {brand:"红米",name:"Redmi K60 至尊版",price:650,spec:"天玑9200+、狂暴性能、1.5K",reason:"性价比游戏旗舰"},
@@ -605,113 +435,103 @@ const phones = [
 let currentList = [];
 let currentSort = 'default';
 
-// 获取随机手机函数
 function getRandomPhones(count) {
-    const shuffled = [...phones].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+    return [...phones].sort(()=>0.5-Math.random()).slice(0,count);
 }
 
-// 初始化页面
-document.addEventListener('DOMContentLoaded', function() {
-    // 设置排序按钮激活状态
+function getHistory() {
+    return JSON.parse(localStorage.getItem('searchHistory')||'[]');
+}
+function saveHistory(word) {
+    if(!word)return;
+    let h = getHistory();
+    h = [word,...h.filter(x=>x!==word)];
+    if(h.length>5)h=h.slice(0,5);
+    localStorage.setItem('searchHistory',JSON.stringify(h));
+    renderHistory();
+}
+function renderHistory() {
+    document.getElementById('historyBox').innerHTML = getHistory().map(w=>
+        `<div class="history-item" onclick="useHistory('${w}')">${w}</div>`
+    ).join('');
+}
+function useHistory(w) {
+    document.getElementById('keyword').value = w;
+    filterPhone();
+}
+
+const tips = [
+    "二手手机优先看电池健康，85%以上更耐用",
+    "骁龙870/天玑8100 是千元档神U，发热低",
+    "2K屏更清晰，但更耗电，1.5K是均衡选择",
+    "百瓦快充虽然快，但长期会略微加速电池老化",
+    "LCD屏护眼，OLED色彩好，看需求选择",
+    "买二手尽量走平台验机，避免暗病",
+    "骁龙8+、骁龙8 Gen2 是目前性价比最高的两代芯片"
+];
+function showRandomTip() {
+    document.getElementById('tipBar').innerText = "💡 "+tips[Math.floor(Math.random()*tips.length)];
+}
+
+function clearAllFilters() {
+    document.getElementById('keyword').value='';
+    document.getElementById('brand').value='全部';
+    document.getElementById('minPrice').value='';
+    document.getElementById('maxPrice').value='';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
     updateSortButtons();
-    
-    // 添加键盘事件支持
-    document.getElementById('keyword').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            filterPhone();
-        }
+    renderHistory();
+    showRandomTip();
+    document.getElementById('keyword').addEventListener('keypress',e=>{
+        if(e.key==='Enter')filterPhone();
     });
-    
-    // 显示随机5部手机（初始状态）
     currentList = getRandomPhones(5);
     updateResultCount();
     renderPhoneList();
 });
 
+// 模糊搜索：输入任意几个字都能匹配
 function filterPhone() {
-    const keyword = document.getElementById('keyword').value.toLowerCase();
+    const keyword = document.getElementById('keyword').value.trim().toLowerCase();
     const brand = document.getElementById('brand').value;
-    const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
-    const maxPrice = parseInt(document.getElementById('maxPrice').value) || 99999;
-    
-    // 显示加载状态
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `
-        <div class="loading">
-            <div class="loading-spinner"></div>
-            <p>正在筛选手机...</p>
-        </div>
-    `;
-    
-    setTimeout(() => {
-        // 筛选逻辑
-        currentList = phones.filter(phone => {
-            const searchKeyword = keyword.toLowerCase();
-            const phoneName = phone.name.toLowerCase();
-            const phoneBrand = phone.brand.toLowerCase();
-            const phoneSpec = phone.spec.toLowerCase();
-            const phoneReason = phone.reason.toLowerCase();
-            
-            const matchesKeyword = !searchKeyword || 
-                phoneName.includes(searchKeyword) || 
-                phoneBrand.includes(searchKeyword) ||
-                phoneSpec.includes(searchKeyword) ||
-                phoneReason.includes(searchKeyword);
-            
-            const matchesBrand = brand === '全部' || phone.brand === brand;
-            const matchesPrice = phone.price >= minPrice && phone.price <= maxPrice;
-            
-            return matchesKeyword && matchesBrand && matchesPrice;
+    const min = parseInt(document.getElementById('minPrice').value)||0;
+    const max = parseInt(document.getElementById('maxPrice').value)||99999;
+
+    const r = document.getElementById('result');
+    r.innerHTML = `<div class="loading"><div class="loading-spinner"></div><p>正在筛选...</p></div>`;
+
+    if(keyword) saveHistory(keyword);
+
+    setTimeout(()=>{
+        currentList = phones.filter(p=>{
+            const text = (p.brand+p.name+p.spec+p.reason).toLowerCase();
+            const matchKw = !keyword || text.includes(keyword);
+            const matchBrand = brand==='全部' || p.brand===brand;
+            const matchPrice = p.price>=min && p.price<=max;
+            return matchKw && matchBrand && matchPrice;
         });
-        
-        // 应用当前排序
         applySorting();
-        
-        // 更新结果
         updateResultCount();
         renderPhoneList();
-    }, 300);
+    },280);
 }
 
 function applySorting() {
-    if (currentSort === 'asc') {
-        currentList.sort((a, b) => a.price - b.price);
-    } else if (currentSort === 'desc') {
-        currentList.sort((a, b) => b.price - a.price);
-    }
+    if(currentSort==='asc')currentList.sort((a,b)=>a.price-b.price);
+    else if(currentSort==='desc')currentList.sort((a,b)=>b.price-a.price);
 }
-
-function sortPhones(sortType) {
-    currentSort = sortType;
-    applySorting();
-    updateSortButtons();
-    renderPhoneList();
+function sortPhones(t) {
+    currentSort = t; applySorting(); updateSortButtons(); renderPhoneList();
 }
-
 function updateSortButtons() {
-    // 移除所有激活状态
-    document.getElementById('sortDefault').classList.remove('active');
-    document.getElementById('sortAsc').classList.remove('active');
-    document.getElementById('sortDesc').classList.remove('active');
-    
-    // 添加当前激活状态
-    if (currentSort === 'default') {
-        document.getElementById('sortDefault').classList.add('active');
-    } else if (currentSort === 'asc') {
-        document.getElementById('sortAsc').classList.add('active');
-    } else {
-        document.getElementById('sortDesc').classList.add('active');
-    }
+    document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById({default:'sortDefault',asc:'sortAsc',desc:'sortDesc'}[currentSort]).classList.add('active');
 }
 
 function resetFilters() {
-    document.getElementById('keyword').value = '';
-    document.getElementById('brand').value = '全部';
-    document.getElementById('minPrice').value = '';
-    document.getElementById('maxPrice').value = '';
-    
-    // 重置后也随机5部
+    clearAllFilters();
     currentList = getRandomPhones(5);
     currentSort = 'default';
     updateSortButtons();
@@ -720,78 +540,59 @@ function resetFilters() {
 }
 
 function updateResultCount() {
-    const count = currentList.length;
-    document.getElementById('resultCount').textContent = `共找到 ${count} 款手机`;
+    document.getElementById('resultCount').textContent = `共 ${currentList.length} 款`;
 }
 
 function renderPhoneList() {
-    const resultDiv = document.getElementById('result');
-    
-    if (currentList.length === 0) {
-        resultDiv.innerHTML = `
-            <div class="no-result">
-                <div class="no-result-icon">😕</div>
-                <p>没有找到符合条件的机型</p>
-                <p style="font-size: 12px; margin-top: 8px; color: #888;">请尝试调整筛选条件</p>
+    const r = document.getElementById('result');
+    if(currentList.length===0) {
+        const rec = getRandomPhones(5);
+        r.innerHTML = `
+        <div class="no-result">
+            <div>😕 暂无匹配机型</div>
+            <p style="font-size:12px;color:#888;">为你推荐热门机型</p>
+        </div>
+        <div class="recommend-label">——— 推荐机型 ———</div>
+        <div class="phone-list">${rec.map((p,i)=>`
+            <div class="phone-item" onclick="showDetail(${i})">
+                <div class="brand-tag brand-${getBrandClass(p.brand)}">${p.brand}</div>
+                <div class="phone-name">${p.name}</div>
+                <div class="phone-price">${p.price}</div>
+                <div class="phone-spec">${p.spec}</div>
+                <div class="phone-reason">${p.reason}</div>
             </div>
-        `;
+        `).join('')}</div>`;
         return;
     }
-    
-    resultDiv.innerHTML = `
-        <div class="phone-list">
-            ${currentList.map((phone, index) => `
-                <div class="phone-item" onclick="showDetail(${index})">
-                    <div class="brand-tag brand-${getBrandClass(phone.brand)}">${phone.brand}</div>
-                    <div class="phone-name">${phone.name}</div>
-                    <div class="phone-price">${phone.price}</div>
-                    <div class="phone-spec">${phone.spec}</div>
-                    <div class="phone-reason">${phone.reason}</div>
-                </div>
-            `).join('')}
+    r.innerHTML = `<div class="phone-list">${currentList.map((p,i)=>`
+        <div class="phone-item" onclick="showDetail(${i})">
+            <div class="brand-tag brand-${getBrandClass(p.brand)}">${p.brand}</div>
+            <div class="phone-name">${p.name}</div>
+            <div class="phone-price">${p.price}</div>
+            <div class="phone-spec">${p.spec}</div>
+            <div class="phone-reason">${p.reason}</div>
         </div>
-    `;
+    `).join('')}</div>`;
 }
 
-function getBrandClass(brand) {
-    const brandMap = {
-        '小米': 'xiaomi',
-        '红米': 'redmi',
-        '苹果': 'apple',
-        'OPPO': 'oppo',
-        '一加': 'oneplus',
-        'vivo': 'vivo',
-        '魅族': 'meizu',
-        '华为': 'huawei'
-    };
-    return brandMap[brand] || 'default';
+function getBrandClass(b) {
+    return {小米:'xiaomi',红米:'redmi',苹果:'apple',OPPO:'oppo',一加:'oneplus',vivo:'vivo',魅族:'meizu',华为:'huawei'}[b]||'default';
 }
 
-function showDetail(index) {
-    const phone = currentList[index];
-    const modal = document.getElementById('modal');
-    
-    document.getElementById('modalTitle').textContent = phone.name;
-    document.getElementById('modalBrand').textContent = phone.brand;
-    document.getElementById('modalBrand').className = `brand-tag brand-${getBrandClass(phone.brand)}`;
-    document.getElementById('modalPrice').textContent = phone.price + '元';
-    document.getElementById('modalSpec').textContent = phone.spec;
-    document.getElementById('modalReason').textContent = '推荐理由：' + phone.reason;
-    
-    modal.style.display = 'flex';
+function showDetail(i) {
+    const p = currentList[i];
+    document.getElementById('modalTitle').textContent = p.name;
+    document.getElementById('modalBrand').textContent = p.brand;
+    document.getElementById('modalBrand').className = 'brand-tag brand-'+getBrandClass(p.brand);
+    document.getElementById('modalPrice').textContent = p.price+'元';
+    document.getElementById('modalSpec').textContent = p.spec;
+    document.getElementById('modalReason').textContent = '推荐理由：'+p.reason;
+    document.getElementById('modal').style.display = 'flex';
 }
-
 function closeModal() {
-    document.getElementById('modal').style.display = 'none';
+    document.getElementById('modal').style.display='none';
 }
-
-// 点击模态框外部关闭
-window.onclick = function(event) {
-    const modal = document.getElementById('modal');
-    if (event.target === modal) {
-        closeModal();
-    }
-}
+window.onclick = e=>{if(e.target===modal)closeModal();}
 </script>
 </body>
 </html>
